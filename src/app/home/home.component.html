@@ -1,0 +1,32 @@
+<!-- icon link -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<mat-toolbar color="primary">
+  <span>New Provisioning Tools v2.0.0</span>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/">
+      <mat-icon>dialpad</mat-icon>
+      <span>home</span>
+    </button>
+
+    <button mat-menu-item routerLink="/pvs">
+      <mat-icon>voicemail</mat-icon>
+      <span>jQuery</span>
+    </button>
+  </mat-menu>
+
+  <!-- 한 줄을 전부 차지한다. 남는공간 1 전부 차지, 줄어들어도 자동 -->
+  <!-- 툴바 메뉴가 오른쪽으로 간다. -->
+  <span fxFlex="1 1 auto"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <!-- <mat-icon> : https://material.io/icons/ 여기서 제목을 입력하면 아이콘이 바뀜 -->
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- 부모index.html의 route-outlet에 자식들을 넣는다. -->
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

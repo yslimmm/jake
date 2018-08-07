@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~datatables.net-dt/css/jquery.dataTables.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/omega/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import 'assets/scss/app';
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  word-break: break-all;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 14px;
+}
+@media screen and (max-width: 599px) {
+  html, body {
+    font-size: 12px;
+  }
+}

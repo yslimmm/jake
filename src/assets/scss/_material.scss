@@ -1,0 +1,28 @@
+body {
+  .mat-card {
+    padding: 0;
+    margin: ($gutter/2);
+
+    /*네스팅(구조화) : 부모 스타일 안에 자식 스타일*/
+    .mat-card-header {
+      height: auto;
+      background-color: #D9D9D9;
+    }
+
+    .mat-card-title {
+      padding-top: $gutter;
+      padding-left: $gutter;
+      padding-right: $gutter;
+      line-height: 1;
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+  }
+
+  .mat-card-content {
+    padding: $gutter;
+    margin-bottom: 0;
+    position: relative;
+    background-color: #f0f0f0;
+  }
+}

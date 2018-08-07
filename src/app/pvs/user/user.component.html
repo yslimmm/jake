@@ -1,0 +1,87 @@
+<mat-card style="height: 700px;">
+  <mat-card-header style="height: 70px">
+    <mat-card-title>사용자 등록</mat-card-title>
+    <!--<mat-card-subtitle>사용자 등록을 할 수 있다...</mat-card-subtitle>-->
+  </mat-card-header>
+
+  <div>
+    <div style="float: left;width: 50%;">
+      <mat-card-content style="height: 630px">
+        <form [formGroup]="form" (ngSubmit)="createSQL()" novalidate>
+
+          <!-- ONE_ID -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ONE_ID" [errorStateMatcher]="matcher" formControlName="oneId"> <!-- [formControl]="emailFormControl" -->
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- SUBS_NO / HOME_CODE -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="SUBS_NO" formControlName="subsNo"> <!-- [formControl]="subsNoFormControl"-->
+            <mat-hint>Ex) 500099912345 OR herit_home OR yslim55</mat-hint>
+            <mat-error>
+              영/숫자 12자리 이내로 입력하세요.
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- HOME_NAME -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="HOME_NAME" id="homeName" value="헤리트네" formControlName="homeName">
+            <mat-hint>공백 가능</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- SUBS_TYPE -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="SUBS_TYPE" formControlName="subsType">   <!-- [formControl]="subsTypeFormControl"-->
+            <mat-hint>01: 개인(HOMEIOT) 가입자 / 02: 법인 가입자 / 03: SOHO 가입자</mat-hint>
+            <mat-error>
+              01 또는 02 또는 03만 입력하세요.
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- CUST_NO -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="CUST_NO" value="" formControlName="custNo">
+            <mat-hint>고객번호 :: 공백 가능</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- SVC_CODE -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="SVC_CODE" value="" formControlName="svcCode">
+            <mat-hint>요금제 :: 공백 가능</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <mat-card-actions>
+            <button type="submit" mat-raised-button color="accent" style="margin:0px auto;display:flex">SQL 생성</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </div>
+
+    <div style="float: right;width: 50%;">
+      <mat-card-content style="height: 630px">
+        <label for="textarea">SQL TEXT AREA</label>
+        <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
+      </mat-card-content>
+    </div>
+
+  </div>
+</mat-card>

@@ -1,0 +1,12 @@
+  <!--<h1> 서버에서 얻은 값!!!! : {{print}}</h1>-->
+  <!--<div [routerLink]="['/']" class="btn btn-primary">로그인하기</div>-->
+<div style="justify-content:space-between;display:flex;">
+  <!--<button mat-raised-button color="accent" routerLink="pvs/user" value="pvsOptions01">사용자 등록</button> -->
+  <button mat-raised-button color="accent" (click)="pvsOptionCheck(1)" value="pvsOptions01">사용자 등록</button>
+  <button mat-raised-button color="accent" (click)="pvsOptionCheck(2)" value="pvsOptions02">단말 등록</button>
+  <button mat-raised-button color="accent" (click)="pvsOptionCheck(3)" value="pvsOptions03">사용자/단말 초기화</button>
+  <button mat-raised-button color="accent" (click)="pvsOptionCheck(4)" value="pvsOptions04">UCUBE 청약</button>
+  <button mat-raised-button color="accent" (click)="pvsOptionCheck(5)" value="pvsOptions05">ggg</button>
+</div>
+
+<router-outlet></router-outlet>
