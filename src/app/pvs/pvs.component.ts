@@ -24,7 +24,7 @@ export class PvsComponent implements OnInit {
   } // end ngOnInit();
 
   initialize(): void {
-    this.pvsOptionCheck(2);   // 초기는 사용자 등록 화면으로
+    this.pvsOptionCheck(1);   // 초기는 사용자 등록 화면으로
   };
 
   // 메뉴 화면 셋팅
@@ -45,6 +45,8 @@ export class PvsComponent implements OnInit {
       case 4:
         this.router.navigateByUrl('pvs/ucube');
         break;
+      case 5:
+        this.router.navigateByUrl('pvs/autoexe');
     }
   }
 }

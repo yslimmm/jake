@@ -1,3 +1,46 @@
-<p>
-  delete works!
-</p>
+<mat-card style="height: 700px;">
+  <mat-card-header style="height: 70px">
+    <mat-card-title>사용자/단말 초기화</mat-card-title>
+    <!--<mat-card-subtitle>사용자 등록을 할 수 있다...</mat-card-subtitle>-->
+  </mat-card-header>
+
+  <div>
+    <div style="float: left;width: 50%;">
+      <mat-card-content style="height: 630px">
+        <form [formGroup]="form" (ngSubmit)="createSQL()" novalidate>
+
+          <!-- SUBS_NO / HOME_CODE -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="HOME_CODE" id="homeCode" formControlName="homeCode">
+            <mat-hint>HOME_CODE 기준 관련 데이터 삭제 가능.</mat-hint>
+            <mat-error>
+              영/숫자 12자리 이내로 입력하세요.
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- DEVICE_ID -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="DEVICE_ID" id="uuid" value="" formControlName="deviceId">
+            <mat-hint>UUID 기준 관련 데이터 삭제 가능.</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <mat-card-actions>
+            <button type="submit" mat-raised-button color="accent" style="margin:0px auto;display:flex">SQL 생성</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </div>
+
+    <div style="float: right;width: 50%;">
+      <mat-card-content style="height: 630px">
+        <label for="textarea">SQL TEXT AREA</label>
+        <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
+      </mat-card-content>
+    </div>
+
+  </div>
+</mat-card>

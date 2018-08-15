@@ -77,6 +77,7 @@ export class UserComponent implements OnInit {
       return;
     }
 
+    // TODO : 스크립트 파일로 빼놓기.
     var iot_home      = "INSERT INTO IOT_HOME(HOME_CODE, HOME_MODE, PROD_CODE, HOME_NAME) VALUES('"+ this.form.controls['subsNo'].value +"', 0, 'LZP0000107', '" + $('#homeName').val() + "');";
     var iot_home_user = "INSERT INTO IOT_HOME_USER (ID, HOME_CODE, PROD_CODE, ONE_ID, ONE_ID_KEY, MASTER_YN) VALUES (IOT_HOME_USER_SEQ.NEXTVAL, '"+ this.form.controls['subsNo'].value +"', 'LZP0000107','"+ this.form.controls['oneId'].value +"', '"+ this.form.controls['subsNo'].value +"', 'Y');";
     var chs_subs_info = "INSERT INTO CHS_SUBS_INFO (SUBS_NO, PROD_CODE, STATUS_CODE, SUBS_CTN, ONE_ID, CREATE_TIME, UPDATE_TIME, DEL_YN, HOME_CODE, SUBS_TYPE, CUST_NO, SVC_CODE) " +

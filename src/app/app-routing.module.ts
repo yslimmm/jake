@@ -5,7 +5,7 @@ import {UserComponent} from "./pvs/user/user.component";
 import {DeleteComponent} from "./pvs/delete/delete.component";
 import {DeviceComponent} from "./pvs/device/device.component";
 import {UcubeComponent} from "./pvs/ucube/ucube.component";
-import {PvsService} from "./pvs/pvs.service";
+import {AutoexeComponent} from "./pvs/autoexe/autoexe.component";
 
 // const [변수]: [타입] :: es6에서 나온 키워드지만 ts문법에 들어감, 지역변수의 개념이 있다.
 // 리터널 객체로 바로 객체를 할당해준다.
@@ -21,6 +21,7 @@ export const routes: Routes = [
       {path: 'device', component: DeviceComponent},       // 단말 등록
       {path: 'delete', component: DeleteComponent},       // 사용자&단말 삭제
       {path: 'ucube', component: UcubeComponent},         // 유큐브 청약
+      {path: 'autoexe', component: AutoexeComponent},     // 자동실행 만들기
     ]},
     /*{path: 'pvs/user', component: UserComponent},*/
   ]},

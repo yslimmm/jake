@@ -24,6 +24,7 @@ import { UserComponent } from './pvs/user/user.component';
 import { DeviceComponent } from './pvs/device/device.component';
 import { DeleteComponent } from './pvs/delete/delete.component';
 import { UcubeComponent } from './pvs/ucube/ucube.component';
+import { AutoexeComponent } from './pvs/autoexe/autoexe.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UcubeComponent } from './pvs/ucube/ucube.component';
     DeviceComponent,
     DeleteComponent,
     UcubeComponent,
+    AutoexeComponent,
   ],
   imports: [
     BrowserModule,

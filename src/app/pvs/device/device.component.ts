@@ -144,6 +144,7 @@ export class DeviceComponent implements OnInit {
 
     var uuid = this.createUUID();
 
+    // TODO : 스크립트 파일로 빼놓기.
     // 기등록 데이터 등록 전 삭제
     var delete_chs_device_conn_info   = "DELETE FROM CHS_DEVICE_CONN_INFO WHERE DEVICE_ID = '" + uuid + "';";
 
@@ -223,19 +224,16 @@ export class DeviceComponent implements OnInit {
 
     switch (radioVal) {
       case "dev00" :  // 사내 DB
-        this.jdbcUrl =  "jdbc:Altibase://10.101.102.151:20300/";
+        this.jdbcUrl =  "";
         break;
       case "dev01" :
-        this.jdbcUrl =  "jdbc:Altibase://106.103.234.68:20300/";
+        this.jdbcUrl =  "";
         break;
       case "dev03" :
-        this.jdbcUrl =  "jdbc:Altibase://106.103.233.130:20300/";
+        this.jdbcUrl =  "";
         break;
       case "dev04" :
-        this.jdbcUrl =  "jdbc:Altibase://106.103.233.189:20300/";
-        break;
-      default :   // 사내 DB
-        this.jdbcUrl =  "jdbc:Altibase://10.101.102.151:20300/";
+        this.jdbcUrl =  "";
         break;
     }
     this.printChsDeviceModel(this.jdbcUrl);

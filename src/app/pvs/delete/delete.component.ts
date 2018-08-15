@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-delete',
@@ -7,11 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteComponent implements OnInit {
 
-  constructor() { }
+  public form: FormGroup;
+
+  constructor(private snackBar: MatSnackBar,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      homeCode: new FormControl(null, [Validators.maxLength(12)]),
+      deviceId: new FormControl(null),
+    });
+  }
 
   ngOnInit() {
   }
-/*
 
   createSQL() {
     if (!this.form.valid) {
@@ -19,7 +28,21 @@ export class DeleteComponent implements OnInit {
       return;
     }
 
-    // 기등록 데이터 등록 전 삭제
+    // TODO : 스크립트 파일로 빼놓기.
+    // 사용자 초기화
+    var delete_home_code_iot_home = "DELETE FROM IOT_HOME WHERE HOME_CODE = '"+$('#homeCode').val()+"';";
+    var delete_home_code_chs_subs_info = "DELETE FROM CHS_SUBS_INFO WHERE SUBS_NO = '"+$('#homeCode').val()+"';";
+    var delete_home_code_iot_home_user = "DELETE FROM IOT_HOME_USER WHERE HOME_CODE = '"+$('#homeCode').val()+"';";
+    var delete_home_code_chs_device = "DELETE FROM CHS_DEVICE WHERE HOME_CODE = '"+$('#homeCode').val()+"';";
+    var delete_home_code_iot_homemode_device = "DELETE FROM IOT_HOMEMODE_DEVICE WHERE HOME_CODE = '"+$('#homeCode').val()+"';";
+    var iot_home_batchcontrol = "DELETE FROM IOT_HOME_BATCHCONTROL WHERE HOME_CODE = '" + $('#homeCode').val() + "';";
+    var iot_device_hub_info = "DELETE FROM IOT_DEVICE_HUB_INFO WHERE HOME_CODE = '" + $('#homeCode').val() + "';";
+    var iot_home_wifi_info = "DELETE FROM IOT_WIFI_INFO WHERE HOME_CODE = '" + $('#homeCode').val() + "';";
+    var iot_home_autoexe = "DELETE FROM IOT_HOME_AUTOEXE WHERE HOME_CODE = '" + $('#homeCode').val() + "';";
+    var iot_autoexe_trigger = "DELETE FROM IOT_AUTOEXE_TRIGGER WHERE HOME_CODE = '" + $('#homeCode').val() + "';";
+    var iot_autoexe_action = "DELETE FROM IOT_AUTOEXE_ACTION WHERE HOME_CODE = '" + $('#homeCode').val() + "';";
+
+    // 단말 초기화
     var delete_chs_device_conn_info = "DELETE FROM CHS_DEVICE_CONN_INFO WHERE DEVICE_ID = '" + $('#uuid').val() + "';";
 
     var delete_iot_device_noti_info = "DELETE FROM IOT_DEVICE_NOTI_INFO WHERE DEVICE_ID = '" + $('#uuid').val() + "';";
@@ -43,31 +66,31 @@ export class DeleteComponent implements OnInit {
     var delete_iot_device_event_hist = "DELETE FROM IOT_DEVICE_EVENT_HIST WHERE DEVICE_ID = '" + $('#uuid').val() + "';";
     var delete_iot_push_event_hist = "DELETE FROM IOT_PUSH_EVENT_HIST WHERE DEVICE_ID = '" + $('#uuid').val() + "';";
 
-    // 사용자 초기화
-    var delete_home_code_iot_home = "DELETE FROM IOT_HOME WHERE HOME_CODE = '"+$('#homeCode').val()+"';";
-    var delete_home_code_chs_subs_info = "DELETE FROM CHS_SUBS_INFO WHERE SUBS_NO = '"+$('#uuid').val()+"';";
-    var delete_home_code_iot_home_user = "DELETE FROM IOT_HOME_USER WHERE HOME_CODE = '"+$('#uuid').val()+"';";
-    var delete_home_code_chs_device = "DELETE FROM CHS_DEVICE WHERE HOME_CODE = '"+$('#uuid').val()+"';";
-    var delete_home_code_iot_homemode_device = "DELETE FROM IOT_HOMEMODE_DEVICE WHERE HOME_CODE = '"+$('#uuid').val()+"';";
-    // iot_home_batchcontrol
-    // iot_device_hub_info
-    // iot_home_wifi_info
-    // iot_home_autoexe
-    // iot_autoexe_trigger
-    // iot_autoexe_action
-
     // 단말 언페어링
     var update_chs_device = "UPDATE CHS_DEVICE SET PARENT_DEVICE_ID = '"+$('#uuid').val()+"', CHS_SUBS_INFO_ONE_ID = null, REGISTER_TIME = null, DISP_NAME = null, LOCATION = null  WHERE ID= '"+$('#uuid').val()+"';";
 
-    // 단말 등록
-    var iot_home      = "INSERT INTO IOT_HOME(HOME_CODE, HOME_MODE, PROD_CODE, HOME_NAME) VALUES('"+ this.form.controls['subsNo'].value +"', 0, 'LZP0000107', '" + $('#homeName').val() + "');";
-    var iot_home_user = "INSERT INTO IOT_HOME_USER (ID, HOME_CODE, PROD_CODE, ONE_ID, ONE_ID_KEY, MASTER_YN) VALUES (IOT_HOME_USER_SEQ.NEXTVAL, '"+ this.form.controls['subsNo'].value +"', 'LZP0000107','"+ this.form.controls['oneId'].value +"', '"+ this.form.controls['subsNo'].value +"', 'Y');";
-    var chs_subs_info = "INSERT INTO CHS_SUBS_INFO (SUBS_NO, PROD_CODE, STATUS_CODE, SUBS_CTN, ONE_ID, CREATE_TIME, UPDATE_TIME, DEL_YN, HOME_CODE, SUBS_TYPE, CUST_NO, SVC_CODE) " +
-      "VALUES ('"+ this.form.controls['subsNo'].value +"', 'LZP0000107', '03', '01000000001', '"+ this.form.controls['oneId'].value +"', SYSDATE, SYSDATE, 'N','"+ this.form.controls['subsNo'].value +"', '"+ this.form.controls['subsType'].value +"', '"+ this.form.controls['custNo'].value +"', '" + this.form.controls['svcCode'].value + "');";
+    var textarea_user   = "=======================" + "\n"
+                        + "사용자 초기화 쿼리" + "\n"
+                        + "=======================" + "\n"
+                        + delete_home_code_iot_home + "\n" + delete_home_code_chs_subs_info + "\n" + delete_home_code_iot_home_user + "\n"
+                        + delete_home_code_chs_device + "\n" + delete_home_code_iot_homemode_device + "\n" + iot_home_batchcontrol + "\n"
+                        + iot_device_hub_info + "\n" + iot_home_wifi_info + "\n" + iot_home_autoexe + "\n"
+                        + iot_autoexe_trigger + "\n" + iot_autoexe_action + "\n\n";
+    var textarea_device = "=======================" + "\n"
+                        + "단말 초기화 쿼리" + "\n"
+                        + "=======================" + "\n"
+                        + delete_chs_device_conn_info + "\n" + delete_iot_device_noti_info + "\n" + delete_iot_device_alim_info + "\n"
+                        + delete_chs_device + "\n" + delete_iot_homemode_device + "\n" + delete_iot_home_batchcontrol + "\n"
+                        + delete_iot_device_ext_timer_info + "\n" + delete_iot_home_autoexe1 + "\n" + delete_iot_autoexe_tigger1 + "\n"
+                        + delete_iot_autoexe_action1 + "\n" + delete_iot_home_autoexe2 + "\n" + delete_iot_autoexe_tigger2 + "\n"
+                        + delete_iot_autoexe_action2 + "\n" + delete_iot_dev_current_status + "\n" + delete_iot_device_event_hist + "\n"
+                        + delete_iot_push_event_hist + "\n\n"
+                        + "=======================" + "\n"
+                        + "단말 언페어링 쿼리" + "\n"
+                        + "=======================" + "\n"
+                        + update_chs_device;
 
-    var textarea      = iot_home + "\n" + iot_home_user + "\n" + chs_subs_info;
-    $('#textarea').val(textarea);
+    $('#textarea').val(textarea_user + textarea_device);
   }
-*/
 
 }
