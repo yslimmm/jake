@@ -18,7 +18,7 @@ import {MatSnackBar} from "@angular/material";
 export class DeviceComponent implements OnInit {
 
   chsDeviceModelList: Array<ChsDeviceModel>;
-  jdbcUrl: String;
+  dbName: String;
 
   selectDBOption: string;
   dbOptions: string[] = ['사내', '개발1', '개발3', '개발4'];
@@ -85,23 +85,23 @@ export class DeviceComponent implements OnInit {
 
     switch (dbOption) {
       case "사내" :
-        this.jdbcUrl =  "";
+        this.dbName =  "dev00";
         break;
       case "개발1" :
-        this.jdbcUrl =  "";
+        this.dbName =  "dev01";
         break;
       case "개발3" :
-        this.jdbcUrl =  "";
+        this.dbName =  "dev03";
         break;
       case "개발4" :
-        this.jdbcUrl =  "";
+        this.dbName =  "dev04";
         break;
     }
-    this.printChsDeviceModel(this.jdbcUrl);
+    this.printChsDeviceModel(this.dbName);
   }
 
-  printChsDeviceModel(url: String): void {
-    this.pvsService.getChsDeviceModel(url)
+  printChsDeviceModel(dbName: String): void {
+    this.pvsService.getChsDeviceModel(dbName)
       .subscribe((responseMap: Array<ChsDeviceModel>) => {
 
         // console.log(responseMap);
@@ -224,19 +224,19 @@ export class DeviceComponent implements OnInit {
 
     switch (radioVal) {
       case "dev00" :  // 사내 DB
-        this.jdbcUrl =  "";
+        this.dbName =  "";
         break;
       case "dev01" :
-        this.jdbcUrl =  "";
+        this.dbName =  "";
         break;
       case "dev03" :
-        this.jdbcUrl =  "";
+        this.dbName =  "";
         break;
       case "dev04" :
-        this.jdbcUrl =  "";
+        this.dbName =  "";
         break;
     }
-    this.printChsDeviceModel(this.jdbcUrl);
+    this.printChsDeviceModel(this.dbName);
 
     /*
      $.ajax({

@@ -16,13 +16,12 @@ export class PvsService {
     });
   }
 
-  private userUrl = 'http://localhost:8080/';   // 요청할 API ip, port
+  private finnServerUrl = 'http://127.0.0.1:5554/';   // 요청할 API ip, port
 
 
-  public getChsDeviceModel(jdbcUrl: String) {
+  public getChsDeviceModel(dbName: String) {
     // return this.http.get<User]>(this.userUrl);
-    return this.http.get<ChsDeviceModel>(this.userUrl + `/pinn?jdbc_url=${jdbcUrl}`);
-    // return this.http.get(this.userUrl + `/pinn?jdbc_url=${jdbcUrl}`);
+    return this.http.get<ChsDeviceModel>(this.finnServerUrl + `/pinn?db=${dbName}`);
   }
 
 }
