@@ -208,6 +208,7 @@ export class DeviceComponent implements OnInit {
     $('#textarea').val(textarea);
   }
 
+  // TODO : uuid 생성 수정하기
   createUUID(): String {
     $('#uuid').val("테스트라라라라");
     return "테스트라라라라";
