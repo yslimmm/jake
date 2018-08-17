@@ -10,43 +10,47 @@
     <div style="float: left;width: 50%;">
       <mat-card-content style="height: 630px">
 
-        <form name="deviceForm" [formGroup]="form" (ngSubmit)="createSQL()" novalidate>
+        <form id="form" name="form" [formGroup]="form" (ngSubmit)="createSQL()" novalidate>
 
           <div>
             <mat-form-field style="width: 25%">
-              <mat-select id="singleSelect" name="singleSelect" placeholder="허브" [formControl]="deviceControl" ng-model="data.singleSelect">
+              <mat-select #optionHub placeholder="허브" [formControl]="deviceControl" [(ngModel)]="selectedHub" ng-options="hub.viewValue for hub in hubInfo">
                 <mat-option>-- 허브 --</mat-option>
-                <mat-option *ngFor="let hub of hubs" [value]="hub">{{hub}}</mat-option>
+                <!--<mat-option *ngFor="let hub of hubs" [value]="hub">{{hub}}</mat-option>-->
+                <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                  <mat-option *ngFor="let hubInfo of group.deviceList" [value]="hubInfo"> {{hubInfo.viewValue}} </mat-option>
+                </mat-optgroup>
               </mat-select>
             </mat-form-field>
 
+            <ng-select [allowClear]="true"
+                       [items]="hubDeviceGroups"
+                       [disabled]="disabled"
+                       (data)="refreshValue($event)"
+                       placeholder="No city selected">
+            </ng-select>
+
             <mat-form-field style="width: 25%">
-              <mat-select placeholder="청약단말" [formControl]="deviceControl">
+              <mat-select placeholder="청약단말" [formControl]="deviceControl" [(ngModel)]="selectedValue">
                 <mat-option>-- 청약(pvs연동)단말 --</mat-option>
-                <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name"
-                              [disabled]="group.disabled">
-                  <mat-option *ngFor="let device of group.deviceList" [value]="device.value">
-                    {{device.viewValue}}
-                  </mat-option>
+                <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                  <mat-option *ngFor="let device of group.deviceList" [value]="device.value"> {{device.viewValue}} </mat-option>
                 </mat-optgroup>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field style="width: 25%">
-              <mat-select placeholder="제휴단말" [formControl]="deviceControl">
+              <mat-select placeholder="제휴단말" [formControl]="deviceControl" [(ngModel)]="selectedValue">
                 <mat-option>-- 제휴(제휴사/oneM2M)단말 --</mat-option>
                 <mat-option *ngFor="let hub of hubs" [value]="hub">{{hub}}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field style="width: 25%">
-              <mat-select placeholder="홈넷단말" [formControl]="deviceControl">
+              <mat-select placeholder="홈넷단말" [formControl]="deviceControl" [(ngModel)]="selectedValue">
                 <mat-option>-- 홈넷 제휴 단말 --</mat-option>
-                <mat-optgroup *ngFor="let group of homenetDeviceGroups" [label]="group.name"
-                              [disabled]="group.disabled">
-                  <mat-option *ngFor="let device of group.deviceList" [value]="device.value">
-                    {{device.viewValue}}
-                  </mat-option>
+                <mat-optgroup *ngFor="let group of homenetDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                  <mat-option *ngFor="let device of group.deviceList" [value]="device.value"> {{device.viewValue}} </mat-option>
                 </mat-optgroup>
               </mat-select>
             </mat-form-field>
@@ -56,7 +60,7 @@
 
           <!-- NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME) -->
           <mat-form-field class="example-full-width">
-            <input matInput id="name" placeholder="NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME)" value="" formControlName="name" class="deviceName">
+            <input matInput id="name" placeholder="NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME)" value="{{selectedHub}}" formControlName="name" class="deviceName">
             <mat-hint></mat-hint>
           </mat-form-field>
           <br>
@@ -64,7 +68,7 @@
 
           <!-- CHS_DEVICE_MODEL_TYPE_CODE -->
           <mat-form-field class="example-full-width">
-            <input matInput id="chsDeviceModelTypeCode" placeholder="CHS_DEVICE_MODEL_TYPE_CODE" value="" formControlName="chsDeviceModelTypeCode" class="deviceTypeCode">
+            <input matInput id="chsDeviceModelTypeCode" placeholder="CHS_DEVICE_MODEL_TYPE_CODE" value="{{selectedValue}}" formControlName="chsDeviceModelTypeCode" class="deviceTypeCode">
             <mat-hint></mat-hint>
           </mat-form-field>
           <br>

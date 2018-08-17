@@ -25,6 +25,7 @@ import { DeviceComponent } from './pvs/device/device.component';
 import { DeleteComponent } from './pvs/delete/delete.component';
 import { UcubeComponent } from './pvs/ucube/ucube.component';
 import { AutoexeComponent } from './pvs/autoexe/autoexe.component';
+import {SelectModule} from "ng2-select";
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { AutoexeComponent } from './pvs/autoexe/autoexe.component';
     /*PrimeNG*/
     AccordionModule,
     PaginatorModule,    /*테이블 페이징*/
+    SelectModule,
   ],
   providers: [PvsService],
   bootstrap: [AppComponent]
