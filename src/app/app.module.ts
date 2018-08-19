@@ -25,7 +25,8 @@ import { DeviceComponent } from './pvs/device/device.component';
 import { DeleteComponent } from './pvs/delete/delete.component';
 import { UcubeComponent } from './pvs/ucube/ucube.component';
 import { AutoexeComponent } from './pvs/autoexe/autoexe.component';
-import {SelectModule} from "ng2-select";
+import {SelectModule} from "ng-select";
+import {DeviceService} from "./pvs/device/device.service";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import {SelectModule} from "ng2-select";
     PaginatorModule,    /*테이블 페이징*/
     SelectModule,
   ],
-  providers: [PvsService],
+  providers: [PvsService, DeviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
