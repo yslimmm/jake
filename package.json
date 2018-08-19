@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^6.0.9",
     "@angular/platform-browser-dynamic": "^6.0.9",
     "@angular/router": "^6.0.9",
+    "angular": "^1.7.3",
     "angular-datatables": "^6.0.0",
     "angular-material": "^1.1.10",
     "bootstrap": "^4.1.2",

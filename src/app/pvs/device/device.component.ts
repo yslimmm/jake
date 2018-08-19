@@ -4,12 +4,14 @@ import * as $ from 'jquery';
 import 'node_modules/datatables.net';
 import 'node_modules/datatables.net-bs4';
 
+import { angular } from "angular";
+
 import {ChsDeviceModel} from "../../models/chsDevoceModel.model";
 import {PvsService} from "../pvs.service";
 import {HttpClient} from "@angular/common/http";
 import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {MatSnackBar} from "@angular/material";
-import {DeviceGroup, DeviceService} from "./device.service";
+import {DeviceGroup, DeviceList, DeviceService} from "./device.service";
 
 @Component({
   selector: 'app-device',
@@ -21,15 +23,16 @@ export class DeviceComponent implements OnInit {
   chsDeviceModelList: Array<ChsDeviceModel>;
   dbName: String;
 
-  selectDBOption: string;
-  deviceControl = new FormControl();
-
   dbOptionGroups: string[] = this.deviceService.getDBOptionGroups()
   hubDeviceGroups: DeviceGroup[] = this.deviceService.getHubList();
   pvsDeviceGroups: DeviceGroup[] = this.deviceService.getPvsList();
   homenetDeviceGroups: DeviceGroup[]= this.deviceService.getHomenetList();
 
-  public deviceForm: FormGroup;
+  selectDeviceModel: DeviceList[];
+  radioDBOptionModel: string;
+
+  deviceForm: FormGroup;
+  deviceControl = new FormControl();
 
   constructor(private pvsService: PvsService,
               private http: HttpClient,
@@ -61,9 +64,8 @@ export class DeviceComponent implements OnInit {
     });
   }
 
-  dbUrlCheck2(dbOption): void {
+  dbUrlCheck(dbOption): void {
     console.log(dbOption);
-
     switch (dbOption) {
       case "사내" :
         this.dbName =  "dev00";

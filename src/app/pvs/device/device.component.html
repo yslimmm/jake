@@ -1,160 +1,161 @@
-<mat-card style="height: 700px;">
-  <mat-card-header style="height: 70px">
-    <mat-card-title>단말 등록</mat-card-title>
-    <mat-card-subtitle>
-      ★★★접속할 DB서버를 선택한 후 MODEL 테이블에서 단말을 검색하여 선택하거나 select를 이용하여 단말 등록 쿼리 생성이 가능합니다.
-    </mat-card-subtitle>
-  </mat-card-header>
+<body ng-app="myApp">
+  <mat-card style="height: 700px;">
+    <mat-card-header style="height: 70px">
+      <mat-card-title>단말 등록</mat-card-title>
+      <mat-card-subtitle>
+        ★★★접속할 DB서버를 선택한 후 MODEL 테이블에서 단말을 검색하여 선택하거나 select를 이용하여 단말 등록 쿼리 생성이 가능합니다.
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <div>
+      <div ng-controller="myCtrl" style="float: left;width: 50%;">
+        <mat-card-content style="height: 630px">
+          <form id="deviceForm" name="deviceForm" [formGroup]="deviceForm" (ngSubmit)="createSQL()" novalidate>
+            <div>
+              <mat-form-field style="width: 25%">
+                <mat-select #optionHub placeholder="허브" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                  <mat-option>-- 허브 --</mat-option>
+                  <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field style="width: 25%">
+                <mat-select placeholder="청약단말" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                  <mat-option>-- 청약(pvs연동)단말 --</mat-option>
+                  <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field style="width: 25%">
+                <mat-select placeholder="제휴단말" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                  <mat-option>-- 제휴(제휴사/oneM2M)단말 --</mat-option>
+                  <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field style="width: 25%">
+                <mat-select placeholder="홈넷단말" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                  <mat-option>-- 홈넷 제휴 단말 --</mat-option>
+                  <mat-optgroup *ngFor="let group of homenetDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <br>
+
+            <!-- NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME) -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="name" placeholder="NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME)" value="{{selectDeviceModel}}" formControlName="name" class="deviceName">
+              <mat-hint></mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+
+            <!-- CHS_DEVICE_MODEL_TYPE_CODE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="chsDeviceModelTypeCode" placeholder="CHS_DEVICE_MODEL_TYPE_CODE" value="{{selectDeviceModel}}" formControlName="chsDeviceModelTypeCode" class="deviceTypeCode">
+              <mat-hint></mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+
+            <!-- MAC -->
+            <mat-form-field class="example-full-width">
+              <input type="text" matInput id="mac" placeholder="MAC" value="" formControlName="mac" style="text-transform: uppercase;">  <!-- [formControl]="deviceMacForm"-->
+              <mat-hint>영/숫자 12자리</mat-hint>
+              <mat-error>
+                영/숫자 12자리 이내로 입력하세요.
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+
+            <!-- SN -->
+            <mat-form-field class="example-full-width">
+              <input type="text" matInput id="sn" placeholder="SN" value="" formControlName="sn" style="text-transform: uppercase;">   <!-- [formControl]="deviceSnForm"-->
+              <mat-hint>영/숫자 12자리</mat-hint>
+              <mat-error>
+                영/숫자 12자리 이내로 입력하세요.
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+
+            <!-- HOME_CODE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="homeCode" placeholder="HOME_CODE" value="" formControlName="homeCode">
+              <mat-hint></mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+
+            <!-- UUID -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="uuid" placeholder="UUID" disabled value="">
+              <mat-hint>(disabled) 복사만 가능</mat-hint>
+            </mat-form-field>
+
+            <br>
+            <br>
+
+            <mat-card-actions>
+              <button mat-raised-button type="submit" color="accent" style="margin:0px auto;display:flex">SQL 생성</button>
+            </mat-card-actions>
+          </form>
+        </mat-card-content>
+      </div>
+
+      <div style="float: right;width: 50%;">
+        <mat-card-content style="height: 630px">
+          <label for="textarea">SQL TEXT AREA</label>
+          <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
+        </mat-card-content>
+      </div>
+
+    </div>
+  </mat-card>
 
   <div>
-    <div style="float: left;width: 50%;">
-      <mat-card-content style="height: 630px">
-        <form id="deviceForm" name="deviceForm" [formGroup]="deviceForm" (ngSubmit)="createSQL()" novalidate>
-          <div>
-            <mat-form-field style="width: 25%">
-              <mat-select #optionHub placeholder="허브" [formControl]="deviceControl"> <!-- [ngModel]="selectedHub" ng-options="hub.viewValue for hub in hubInfo" -->
-                <mat-option>-- 허브 --</mat-option>
-                <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                  <mat-option *ngFor="let hubInfo of group.deviceList" [value]="hubInfo"> {{hubInfo.viewValue}} </mat-option>
-                </mat-optgroup>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field style="width: 25%">
-              <mat-select placeholder="청약단말" [formControl]="deviceControl" >
-                <mat-option>-- 청약(pvs연동)단말 --</mat-option>
-                <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                  <mat-option *ngFor="let device of group.deviceList" [value]="device.value"> {{device.viewValue}} </mat-option>
-                </mat-optgroup>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field style="width: 25%">
-              <mat-select placeholder="제휴단말" [formControl]="deviceControl">
-                <mat-option>-- 제휴(제휴사/oneM2M)단말 --</mat-option>
-                <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                  <mat-option *ngFor="let hubInfo of group.deviceList" [value]="hubInfo"> {{hubInfo.viewValue}} </mat-option>
-                </mat-optgroup>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field style="width: 25%">
-              <mat-select placeholder="홈넷단말" [formControl]="deviceControl">
-                <mat-option>-- 홈넷 제휴 단말 --</mat-option>
-                <mat-optgroup *ngFor="let group of homenetDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                  <mat-option *ngFor="let device of group.deviceList" [value]="device.value"> {{device.viewValue}} </mat-option>
-                </mat-optgroup>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-          <br>
-
-          <!-- NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME) -->
-          <mat-form-field class="example-full-width">
-            <input matInput id="name" placeholder="NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME)" value="" formControlName="name" class="deviceName">
-            <mat-hint></mat-hint>
-          </mat-form-field>
-          <br>
-          <br>
-
-          <!-- CHS_DEVICE_MODEL_TYPE_CODE -->
-          <mat-form-field class="example-full-width">
-            <input matInput id="chsDeviceModelTypeCode" placeholder="CHS_DEVICE_MODEL_TYPE_CODE" value="" formControlName="chsDeviceModelTypeCode" class="deviceTypeCode">
-            <mat-hint></mat-hint>
-          </mat-form-field>
-          <br>
-          <br>
-
-          <!-- MAC -->
-          <mat-form-field class="example-full-width">
-            <input type="text" matInput id="mac" placeholder="MAC" value="" formControlName="mac" style="text-transform: uppercase;">  <!-- [formControl]="deviceMacForm"-->
-            <mat-hint>영/숫자 12자리</mat-hint>
-            <mat-error>
-              영/숫자 12자리 이내로 입력하세요.
-            </mat-error>
-          </mat-form-field>
-          <br>
-          <br>
-
-          <!-- SN -->
-          <mat-form-field class="example-full-width">
-            <input type="text" matInput id="sn" placeholder="SN" value="" formControlName="sn" style="text-transform: uppercase;">   <!-- [formControl]="deviceSnForm"-->
-            <mat-hint>영/숫자 12자리</mat-hint>
-            <mat-error>
-              영/숫자 12자리 이내로 입력하세요.
-            </mat-error>
-          </mat-form-field>
-          <br>
-          <br>
-
-          <!-- HOME_CODE -->
-          <mat-form-field class="example-full-width">
-            <input matInput id="homeCode" placeholder="HOME_CODE" value="" formControlName="homeCode">
-            <mat-hint></mat-hint>
-          </mat-form-field>
-          <br>
-          <br>
-
-          <!-- UUID -->
-          <mat-form-field class="example-full-width">
-            <input matInput id="uuid" placeholder="UUID" disabled value="">
-            <mat-hint>(disabled) 복사만 가능</mat-hint>
-          </mat-form-field>
-
-          <br>
-          <br>
-
-          <mat-card-actions>
-            <button mat-raised-button type="submit" color="accent" style="margin:0px auto;display:flex">SQL 생성</button>
-          </mat-card-actions>
-        </form>
-      </mat-card-content>
+    <div style="border: 1px solid navy">
+      멀티 데이터베이스 연동 서비스 준비중...
+      <br>
+      <mat-radio-group class="example-radio-group" [(ngModel)]="radioDBOptionModel" [disabled]="true">
+        <mat-radio-button class="example-radio-button" *ngFor="let db of dbOptionGroups" [disabled]="true" [value]="db" (click)="dbUrlCheck(db)">
+          {{db}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="example-selected-value">Your favorite season is: {{radioDBOptionModel}}</div>
     </div>
 
-    <div style="float: right;width: 50%;">
-      <mat-card-content style="height: 630px">
-        <label for="textarea">SQL TEXT AREA</label>
-        <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
-      </mat-card-content>
-    </div>
-
-  </div>
-</mat-card>
-
-
-<div>
-  <div style="border: 1px solid navy">
-    멀티 데이터베이스 연동 서비스 준비중...
-    <br>
-    <mat-radio-group class="example-radio-group" [(ngModel)]="selectDBOption" [disabled]="true">
-      <mat-radio-button class="example-radio-button" *ngFor="let db of dbOptionGroups" [disabled]="true" [value]="db" (click)="dbUrlCheck2(db)">
-        {{db}}
-      </mat-radio-button>
-    </mat-radio-group>
-    <div class="example-selected-value">Your favorite season is: {{selectDBOption}}</div>
-  </div>
-
-  <div>
-    <table id="chsDeviceModelTable" class="table table-bordered table-bordered table table-hover table table-sm dataTable">
-      <thead class="thead-light">
-      <tr>
-        <th>ID</th>
-        <th>CHS_DEVICE_TYPE_CODE</th>
-        <th>NAME</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <ng-template ngFor let-item [ngForOf]="chsDeviceModelList" let-idx="index">
+    <div>
+      <table id="chsDeviceModelTable" class="table table-bordered table-bordered table table-hover table table-sm dataTable">
+        <thead class="thead-light">
         <tr>
-          <th>{{item.id}}</th>
-          <th>{{item.chsDeviceTypeCode}}</th>
-          <th>{{item.name}}</th>
+          <th>ID</th>
+          <th>CHS_DEVICE_TYPE_CODE</th>
+          <th>NAME</th>
         </tr>
-      </ng-template>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+        <ng-template ngFor let-item [ngForOf]="chsDeviceModelList" let-idx="index">
+          <tr>
+            <th>{{item.id}}</th>
+            <th>{{item.chsDeviceTypeCode}}</th>
+            <th>{{item.name}}</th>
+          </tr>
+        </ng-template>
+        </tbody>
+      </table>
+    </div>
+    <!--<p-paginator [rows]="10" [totalRecords]="50" [rowsPerPageOptions]="[50, 100, 150, 300, 500]"></p-paginator>-->
   </div>
-  <!--<p-paginator [rows]="10" [totalRecords]="50" [rowsPerPageOptions]="[50, 100, 150, 300, 500]"></p-paginator>-->
-</div>
+</body>
