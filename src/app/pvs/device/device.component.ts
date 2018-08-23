@@ -1,10 +1,8 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
 
 import * as $ from 'jquery';
 import 'node_modules/datatables.net';
 import 'node_modules/datatables.net-bs4';
-
-import { angular } from "angular";
 
 import {ChsDeviceModel} from "../../models/chsDevoceModel.model";
 import {PvsService} from "../pvs.service";
@@ -28,7 +26,7 @@ export class DeviceComponent implements OnInit {
   pvsDeviceGroups: DeviceGroup[] = this.deviceService.getPvsList();
   homenetDeviceGroups: DeviceGroup[]= this.deviceService.getHomenetList();
 
-  selectDeviceModel: DeviceList[];
+  selectDeviceModel: DeviceList;
   radioDBOptionModel: string;
 
   deviceForm: FormGroup;
@@ -62,6 +60,9 @@ export class DeviceComponent implements OnInit {
       $('.deviceName').val(data[2]);
       $('.deviceTypeCode').val(data[1]);
     });
+
+    console.log("fnfnfnf");
+    console.log(this.selectDeviceModel);
   }
 
   dbUrlCheck(dbOption): void {
@@ -82,6 +83,28 @@ export class DeviceComponent implements OnInit {
     }
     // TODO : multi DB연동 테스트 성공하면 아래 주석 풀기
     // this.printChsDeviceModel(this.dbName);
+  }
+
+  selectChange(event) {
+    //In my case $event come with a id value
+    // this.selectDeviceModel = this.alldeviceList[$event];
+    if(null != event) {
+      console.log("==================");
+      // let obj: DeviceList = JSON.parse(event.toString());
+      let obj: DeviceList = event;
+      // console.log(obj.value);
+      // console.log(obj.typeValue);
+      // console.log(obj.modelValue);
+
+      // TODO : select시 [(ngModel)]로 양방향 바인딩을 하고싶지만 한번의 셀렉트에 object안의 여러 value를 셋팅하는건 불가능한건가? ng-options를 사용이 가능한가? 자꾸 삽질하게된다..
+      // this.selectDeviceModel.value = obj.value;
+      // this.selectDeviceModel.modelValue = obj.modelValue;
+      // this.selectDeviceModel.typeValue = obj.typeValue;
+
+      $('#name').val(obj.modelValue);
+      $('#chsDeviceModelTypeCode').val(obj.typeValue);
+    }
+
   }
 
   printChsDeviceModel(dbName: String): void {

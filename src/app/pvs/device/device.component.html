@@ -13,16 +13,16 @@
           <form id="deviceForm" name="deviceForm" [formGroup]="deviceForm" (ngSubmit)="createSQL()" novalidate>
             <div>
               <mat-form-field style="width: 25%">
-                <mat-select #optionHub placeholder="허브" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                <mat-select #optionHub placeholder="허브" [formControl]="deviceControl" (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
                   <mat-option>-- 허브 --</mat-option>
                   <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}} </mat-option>
                   </mat-optgroup>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field style="width: 25%">
-                <mat-select placeholder="청약단말" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                <mat-select placeholder="청약단말" [formControl]="deviceControl" (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
                   <mat-option>-- 청약(pvs연동)단말 --</mat-option>
                   <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name" [disabled]="group.disabled">
                     <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
@@ -31,7 +31,7 @@
               </mat-form-field>
 
               <mat-form-field style="width: 25%">
-                <mat-select placeholder="제휴단말" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                <mat-select placeholder="제휴단말" [formControl]="deviceControl" (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
                   <mat-option>-- 제휴(제휴사/oneM2M)단말 --</mat-option>
                   <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
                     <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
@@ -40,7 +40,7 @@
               </mat-form-field>
 
               <mat-form-field style="width: 25%">
-                <mat-select placeholder="홈넷단말" [formControl]="deviceControl" [(ngModel)]="selectDeviceModel">
+                <mat-select placeholder="홈넷단말" [formControl]="deviceControl" (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
                   <mat-option>-- 홈넷 제휴 단말 --</mat-option>
                   <mat-optgroup *ngFor="let group of homenetDeviceGroups" [label]="group.name" [disabled]="group.disabled">
                     <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
@@ -53,7 +53,7 @@
 
             <!-- NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME) -->
             <mat-form-field class="example-full-width">
-              <input matInput id="name" placeholder="NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME)" value="{{selectDeviceModel}}" formControlName="name" class="deviceName">
+              <input matInput id="name" placeholder="NAME (CHS_DEVICE.CHS_DEVICE_MODEL_NAME)" value="" formControlName="name" class="deviceName">
               <mat-hint></mat-hint>
             </mat-form-field>
             <br>
@@ -61,7 +61,7 @@
 
             <!-- CHS_DEVICE_MODEL_TYPE_CODE -->
             <mat-form-field class="example-full-width">
-              <input matInput id="chsDeviceModelTypeCode" placeholder="CHS_DEVICE_MODEL_TYPE_CODE" value="{{selectDeviceModel}}" formControlName="chsDeviceModelTypeCode" class="deviceTypeCode">
+              <input matInput id="chsDeviceModelTypeCode" placeholder="CHS_DEVICE_MODEL_TYPE_CODE" value="" formControlName="chsDeviceModelTypeCode" class="deviceTypeCode">
               <mat-hint></mat-hint>
             </mat-form-field>
             <br>
