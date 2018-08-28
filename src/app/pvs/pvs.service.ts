@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ChsDeviceModel} from "../models/chsDevoceModel.model";
 
+import 'spring-boot/finn.proxy.config';
+
 @Injectable()
 export class PvsService {
 
@@ -11,17 +13,15 @@ export class PvsService {
 
   constructor(private http: HttpClient) {
     this.SERVER = `${environment.HOST}`;
+    // this.SERVER = `${pinn.target}`
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
   }
 
-  private finnServerUrl = 'http://127.0.0.1:5554/';   // 요청할 API ip, port
-
-
   public getChsDeviceModel(dbName: String) {
     // return this.http.get<User]>(this.userUrl);
-    return this.http.get<ChsDeviceModel>(this.finnServerUrl + `/pinn?db=${dbName}`);
+    return this.http.get<ChsDeviceModel>(this.SERVER + `/pvs/pinn?db=${dbName}`);
   }
 
 }

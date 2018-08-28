@@ -24,6 +24,7 @@ export class DeviceComponent implements OnInit {
   dbOptionGroups: string[] = this.deviceService.getDBOptionGroups();
   hubDeviceGroups: DeviceGroup[] = this.deviceService.getHubList();
   pvsDeviceGroups: DeviceGroup[] = this.deviceService.getPvsList();
+  partnerDeviceGroups: DeviceGroup[] = this.deviceService.getPartnerList();
   homenetDeviceGroups: DeviceGroup[]= this.deviceService.getHomenetList();
 
   selectDeviceModel: DeviceList;
@@ -86,12 +87,8 @@ export class DeviceComponent implements OnInit {
     //In my case $event come with a id value
     // this.selectDeviceModel = this.alldeviceList[$event];
     if(null != event) {
-      // console.log("==================");
-      // let obj: DeviceList = JSON.parse(event.toString());
+      // let obj: DeviceList = JSON.parse(event.toString()); 이미 json이기때문에 parse하지 않아도 된다.
       let obj: DeviceList = event;
-      // console.log(obj.value);
-      // console.log(obj.typeValue);
-      // console.log(obj.modelValue);
 
       // TODO : select시 [(ngModel)]로 양방향 바인딩을 하고싶지만 한번의 셀렉트에 object안의 여러 value를 셋팅하는건 불가능한건가? ng-options를 사용이 가능한가? 자꾸 삽질하게된다..
       // this.selectDeviceModel.value = obj.value;
@@ -136,13 +133,14 @@ export class DeviceComponent implements OnInit {
     }
 
     var name = $('#name').val();
+    var typeCode = $('#chsDeviceModelTypeCode').val();
     var mac = $('#mac').val();
     var sn  = $('#sn').val();
 
     var chs_device_type_level = "2";
     var device_id_type = "1";
 
-    var uuid = this.createUUID();
+    var uuid = this.createUUID(name, typeCode, mac, sn, chs_device_type_level, device_id_type);
 
     // TODO : 스크립트 파일로 빼놓기.
     // 기등록 데이터 등록 전 삭제
@@ -209,9 +207,11 @@ export class DeviceComponent implements OnInit {
   }
 
   // TODO : uuid 생성 수정하기
-  createUUID(): String {
-    $('#uuid').val("테스트라라라라");
-    return "테스트라라라라";
+  createUUID(name: string, typeCode: string, mac: string, sn: string, chs_device_type_level: string, device_id_type: string): string {
+    var uuid = this.deviceService.getUuid(name, typeCode, mac, sn, chs_device_type_level, device_id_type);
+    $('#uuid').val(uuid);
+
+    return uuid;
   }
 
 

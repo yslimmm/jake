@@ -25,7 +25,8 @@
                 <mat-select placeholder="청약단말" [formControl]="deviceControl" (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
                   <mat-option>-- 청약(pvs연동)단말 --</mat-option>
                   <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}}
+                    </mat-option>
                   </mat-optgroup>
                 </mat-select>
               </mat-form-field>
@@ -33,8 +34,10 @@
               <mat-form-field style="width: 25%">
                 <mat-select placeholder="제휴단말" [formControl]="deviceControl" (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
                   <mat-option>-- 제휴(제휴사/oneM2M)단말 --</mat-option>
-                  <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                  <mat-optgroup *ngFor="let group of partnerDeviceGroups" [label]="group.name"
+                                [disabled]="group.disabled">
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}}
+                    </mat-option>
                   </mat-optgroup>
                 </mat-select>
               </mat-form-field>
@@ -43,7 +46,8 @@
                 <mat-select placeholder="홈넷단말" [formControl]="deviceControl" (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
                   <mat-option>-- 홈넷 제휴 단말 --</mat-option>
                   <mat-optgroup *ngFor="let group of homenetDeviceGroups" [label]="group.name" [disabled]="group.disabled">
-                    <mat-option *ngFor="let device of group.deviceList" [value]="device.typeValue"> {{device.viewValue}} </mat-option>
+                    <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}}
+                    </mat-option>
                   </mat-optgroup>
                 </mat-select>
               </mat-form-field>
