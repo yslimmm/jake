@@ -21,7 +21,7 @@ export class DeviceComponent implements OnInit {
   chsDeviceModelList: Array<ChsDeviceModel>;
   dbName: String;
 
-  dbOptionGroups: string[] = this.deviceService.getDBOptionGroups()
+  dbOptionGroups: string[] = this.deviceService.getDBOptionGroups();
   hubDeviceGroups: DeviceGroup[] = this.deviceService.getHubList();
   pvsDeviceGroups: DeviceGroup[] = this.deviceService.getPvsList();
   homenetDeviceGroups: DeviceGroup[]= this.deviceService.getHomenetList();
@@ -60,13 +60,10 @@ export class DeviceComponent implements OnInit {
       $('.deviceName').val(data[2]);
       $('.deviceTypeCode').val(data[1]);
     });
-
-    console.log("fnfnfnf");
-    console.log(this.selectDeviceModel);
   }
 
   dbUrlCheck(dbOption): void {
-    console.log(dbOption);
+    // console.log(dbOption);
     switch (dbOption) {
       case "사내" :
         this.dbName =  "dev00";
@@ -89,7 +86,7 @@ export class DeviceComponent implements OnInit {
     //In my case $event come with a id value
     // this.selectDeviceModel = this.alldeviceList[$event];
     if(null != event) {
-      console.log("==================");
+      // console.log("==================");
       // let obj: DeviceList = JSON.parse(event.toString());
       let obj: DeviceList = event;
       // console.log(obj.value);
@@ -100,11 +97,9 @@ export class DeviceComponent implements OnInit {
       // this.selectDeviceModel.value = obj.value;
       // this.selectDeviceModel.modelValue = obj.modelValue;
       // this.selectDeviceModel.typeValue = obj.typeValue;
-
       $('#name').val(obj.modelValue);
       $('#chsDeviceModelTypeCode').val(obj.typeValue);
     }
-
   }
 
   printChsDeviceModel(dbName: String): void {
