@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 
-function createUuid(name: string, typeCode: string, mac: string, sn: string, chs_device_type_level: string, device_id_type: string): string {
-  return "Test-Test-test-test";
-}
-
 export interface DeviceList {
   value: string;
   modelValue: string;
@@ -335,15 +331,5 @@ export class DeviceService {
 
   public getHomenetList() {
     return this.homenetDeviceGroups;
-  }
-
-  /**
-   *
-   * CHS_DEVICE_TYPE_LEVEL : 1이면 허브를 타지 않는 디바이스, 2이면 허브를 타는 디바이스
-   * DEVICE_ID_TYPE : 0은 MAC기준, 1은 SN기준
-   *
-   */
-  public getUuid(name: string, typeCode: string, mac: string, sn: string, chs_device_type_level: string, device_id_type: string) {
-    return createUuid(name, typeCode, mac, sn, chs_device_type_level, device_id_type);
   }
 }

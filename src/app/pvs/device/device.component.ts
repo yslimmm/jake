@@ -10,6 +10,25 @@ import {HttpClient} from "@angular/common/http";
 import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {MatSnackBar} from "@angular/material";
 import {DeviceGroup, DeviceList, DeviceService} from "./device.service";
+import {Md5} from "ts-md5/dist/md5";
+
+
+export class Uuid {
+  static newUuid(deviceInfo: string): string {
+    // return 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
+    //   return Md5.hashStr(deviceInfo), v = c == 'x' ? r : (r&0x3|0x8);
+    // }).toUpperCase();
+
+    var uuid = Md5.hashStr(deviceInfo).toString();
+    var slice1 = uuid.slice(0, 8);
+    var slice2 = uuid.slice(8, 12);
+    var slice3 = uuid.slice(12, 16);
+    var slice4 = uuid.slice(16, 20);
+    var slice5 = uuid.slice(20);
+
+    return uuid.toUpperCase() + " / " + (slice1 + "-" + slice2 + "-" + slice3 + "-" + slice4 + "-" + slice5).toUpperCase();
+  }
+}
 
 @Component({
   selector: 'app-device',
@@ -132,15 +151,15 @@ export class DeviceComponent implements OnInit {
       return;
     }
 
-    var name = $('#name').val();
-    var typeCode = $('#chsDeviceModelTypeCode').val();
-    var mac = $('#mac').val();
-    var sn  = $('#sn').val();
+    var name = $('#name').val() + "";
+    var typeCode = $('#chsDeviceModelTypeCode').val() + "";
+    var mac = $('#mac').val() + "";
+    var sn = $('#sn').val() + "";
 
-    var chs_device_type_level = "2";
-    var device_id_type = "1";
+    var chsDeviceTypeLevel = "2";
+    var deviceIdType = "1";
 
-    var uuid = this.createUUID(name, typeCode, mac, sn, chs_device_type_level, device_id_type);
+    var uuid = this.createUUID(name, typeCode, mac, sn, chsDeviceTypeLevel, deviceIdType);
 
     // TODO : 스크립트 파일로 빼놓기.
     // 기등록 데이터 등록 전 삭제
@@ -169,20 +188,20 @@ export class DeviceComponent implements OnInit {
 
     // EMETER, SPTL-W01(WIFI PLUG), MTTL-W01(WIFI PLUG)
    /* if(name.equals("ID003")) {
-      chs_device_type_level = "1";
-      device_id_type= "1";
+    chsDeviceTypeLevel = "1";
+    deviceIdType= "1";
     } else if (name.equals("SPTL-W01") || name.equals("MTTL-W01")) {
-      chs_device_type_level = "1";
-      device_id_type= "0";
+    chsDeviceTypeLevel = "1";
+    deviceIdType= "0";
     } else {
-      chs_device_type_level = "2";
-      device_id_type= "1";
+    chsDeviceTypeLevel = "2";
+    deviceIdType= "1";
     }*/
 
     // 단말 등록
-    var insert_chs_device = "INSERT INTO CHS_DEVICE(ID, CHS_DEVICE_MODEL_ID, CHS_DEVICE_MODEL_NAME, CHS_DEVICE_TYPE_CODE, CHS_DEVICE_TYPE_LEVEL, DEVICE_ID_TYPE, PARENT_DEVICE_ID, MAC, SN, HOME_CODE, CHS_SUBS_INFO_SUBS_NO, DEL_YN, CONTROL_ENABLE) "
+    var insert_chs_device = "INSERT INTO CHS_DEVICE(ID, CHS_DEVICE_MODEL_ID, CHS_DEVICE_MODEL_NAME, CHS_DEVICE_TYPE_CODE, chsDeviceTypeLevel, deviceIdType, PARENT_DEVICE_ID, MAC, SN, HOME_CODE, CHS_SUBS_INFO_SUBS_NO, DEL_YN, CONTROL_ENABLE) "
                           + "VALUES ('" + uuid + "', '0', '" + this.deviceForm.controls['name'].value + "', '" + this.deviceForm.controls['chsDeviceModelTypeCode'].value + "', '"
-                          + chs_device_type_level + "', " + device_id_type + ", '" + uuid + "', '" + mac + "', '" + sn + "', '"
+      + chsDeviceTypeLevel + "', " + deviceIdType + ", '" + uuid + "', '" + mac + "', '" + sn + "', '"
                           + this.deviceForm.controls['homeCode'].value + "', '" + this.deviceForm.controls['homeCode'].value + "', 'N', 'Y');";
 
 
@@ -206,15 +225,30 @@ export class DeviceComponent implements OnInit {
     $('#textarea').val(textarea);
   }
 
+  /**
+   *
+   * CHS_DEVICE_TYPE_LEVEL : 1이면 허브를 타지 않는 디바이스, 2이면 허브를 타는 디바이스
+   * DEVICE_ID_TYPE : 0은 MAC기준, 1은 SN기준
+   *
+   */
   // TODO : uuid 생성 수정하기
-  createUUID(name: string, typeCode: string, mac: string, sn: string, chs_device_type_level: string, device_id_type: string): string {
-    var uuid = this.deviceService.getUuid(name, typeCode, mac, sn, chs_device_type_level, device_id_type);
+  createUUID(name: string, typeCode: string, mac: string, sn: string, chsDeviceTypeLevel: string, deviceIdType: string): string {
+
+    var uuidType = "";
+
+    if (deviceIdType === "0") {
+      uuidType = mac;
+    } else if (deviceIdType === "1") {
+      uuidType = sn;
+    } else {
+      uuidType = sn;
+    }
+
+    var uuid = Uuid.newUuid(typeCode + name + uuidType);
     $('#uuid').val(uuid);
 
     return uuid;
   }
-
-
 
 
   // --------------------------------------------------- 워매.. 아까워라.... 공부용이니 냅두자...
