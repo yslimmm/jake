@@ -1,3 +1,151 @@
-<p>
-  ucube 페이지 준비중...
-</p>
+<mat-card style="height: 700px;">
+  <mat-card-header style="height: 70px">
+    <mat-card-title>UCUBE 청약</mat-card-title>
+    <mat-card-subtitle>
+      pvs2 / E2E 시험을 위한 HOMEIOT_PROVISIONING 쿼리.
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <div>
+    <div style="float: left;width: 50%;">
+      <mat-card-content style="height: 630px">
+        <form id="ucubeForm" name="ucubeForm" [formGroup]="ucubeForm" (ngSubmit)="addPvs2SQL()" novalidate>
+          <div>
+            <mat-form-field style="width: 25%">
+              <mat-select #optionHub placeholder="허브" [formControl]="ucubeControl"
+                          (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
+                <mat-option>-- 허브 --</mat-option>
+                <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                  <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="width: 25%">
+              <mat-select placeholder="청약단말" [formControl]="ucubeControl" (ngModelChange)="selectChange($event)"
+                          [(ngModel)]="selectDeviceModel">
+                <mat-option>-- 청약(pvs연동)단말 --</mat-option>
+                <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name" [disabled]="group.disabled">
+                  <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <br>
+
+          <div style="float: left;width: 43%;padding-bottom: 50px;">
+            <!-- HOME_CODE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="homeCode" placeholder="HOME_CODE(SUBS_NO)" value="" formControlName="homeCode"
+                     class="homeCode">
+              <mat-hint></mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+            <br>
+
+            <!-- CUST_NO -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="custNo" placeholder="CUST_NO" value="4015435722" formControlName="custNo"
+                     class="custNo">
+              <mat-hint>고객번호(테스트시에는 홈코드와 동일해도 무관)</mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+            <br>
+
+            <!-- SVC_CODE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="svcCode" placeholder="SVC_CODE" value="" formControlName="svcCode">
+              <mat-hint>유료가입자(기본): LRZ0030353 / 무료가입자(제휴): LRZ0030519 / 시큐리티(112): LRZ0030540 / IoT CAPS: LRZ0030469 /
+                부모안심(실버케어): LRZ0030571 / 복합: LRZ0030353|LRZ0030519
+              </mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div style="float: right;width: 55%;padding-bottom: 50px;">
+            <!-- SUBS_TYPE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="subsType" placeholder="SUBS_TYPE" value="" formControlName="subsType">
+              <mat-hint>01: 개인(HOMEIOT) 가입자 / 02: 법인 가입자 / 03: SOHO 가입자</mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+            <br>
+
+            <!-- EVENT_CODE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="eventCode" placeholder="EVENT_CODE" value="" formControlName="eventCode">
+              <mat-hint>01: 신규청약 / 02: 임시계정신규 / 03: 임시계정사용 완료 / 04 : AS장비변경 / 05: 명의변경 / 06: 변경 / 07: 청약해지 / 08: 홈코드
+                변경(x) / 10: 승계 / 11: 원복(승계취소)
+              </mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+            <br>
+
+            <!-- ONE_ID -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="oneId" placeholder="ONE_ID" value="">
+              <mat-hint>pvs와 무관하게 앱 최초 로그인까지 처리하기 위한 내용</mat-hint>
+            </mat-form-field>
+          </div>
+
+
+          <div style="float: left;width: 43%;padding-bottom: 50px;">
+            <!-- DEVICE_MODEL_CODE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="deviceModelCode" placeholder="DEVICE_MODEL_CODE" value=""
+                     formControlName="deviceModelCode">
+              <mat-hint>SELECT 박스로 추가</mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+
+            <!-- DEVICE_TYPE_CODE -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="deviceTypeCode" placeholder="DEVICE_TYPE_CODE" value=""
+                     formControlName="deviceTypeCode">
+              <mat-hint>SELECT 박스로 추가</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div style="float: right;width: 55%;padding-bottom: 50px;">
+            <!-- MAC -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="mac" placeholder="MAC" value="">
+              <mat-hint>소문자, 4자리씩 끊어서 온점 표시 필수</mat-hint>
+            </mat-form-field>
+            <br>
+            <br>
+
+            <!-- SN -->
+            <mat-form-field class="example-full-width">
+              <input matInput id="sn" placeholder="SN" value="">
+              <mat-hint>대문자</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <mat-card-actions>
+            <button mat-raised-button type="submit" color="accent" style="margin:0px auto;display:flex">1. 가입자 추가
+            </button>
+            <button mat-raised-button type="submit" color="accent" style="margin:0px auto;display:flex">2. 청약 단말 추가
+            </button>
+            <button mat-raised-button type="button" color="accent" style="margin:0px auto;display:flex">강제 로그인</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </div>
+
+    <div style="float: right;width: 50%;">
+      <mat-card-content style="height: 630px">
+        <label for="textarea">SQL TEXT AREA</label>
+        <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
+      </mat-card-content>
+    </div>
+
+  </div>
+</mat-card>

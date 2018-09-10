@@ -26,7 +26,7 @@ export class Uuid {
     var slice4 = uuid.slice(16, 20);
     var slice5 = uuid.slice(20);
 
-    return uuid.toUpperCase() + " / " + (slice1 + "-" + slice2 + "-" + slice3 + "-" + slice4 + "-" + slice5).toUpperCase();
+    return (slice1 + "-" + slice2 + "-" + slice3 + "-" + slice4 + "-" + slice5).toUpperCase();
   }
 }
 
@@ -63,11 +63,11 @@ export class DeviceComponent implements OnInit {
       name: new FormControl(null, [Validators.required]),
       chsDeviceModelTypeCode: new FormControl(null, [Validators.required]),
       mac: new FormControl(null, [Validators.required,
-                                  Validators.maxLength(12),
-                                  Validators.pattern('^[a-zA-Z0-9]*$')]),
-      sn: new FormControl(null,  [Validators.required,
-                                  Validators.maxLength(12),
-                                  Validators.pattern('^[a-zA-Z0-9]*$')]),
+        Validators.maxLength(12),
+        Validators.pattern('^[a-zA-Z0-9]*$')]),
+      sn: new FormControl(null, [Validators.required,
+        Validators.maxLength(12),
+        Validators.pattern('^[a-zA-Z0-9]*$')]),
       homeCode: new FormControl(null, [Validators.required])
     });
   }
