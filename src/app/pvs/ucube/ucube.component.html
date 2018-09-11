@@ -13,7 +13,7 @@
           <div>
             <mat-form-field style="width: 25%">
               <mat-select #optionHub placeholder="허브" [formControl]="ucubeControl"
-                          (ngModelChange)="selectChange($event)" [(ngModel)]="selectDeviceModel">
+                          (ngModelChange)="selectChange($event)"> <!-- [(ngModel)]="selectDeviceModel" -->
                 <mat-option>-- 허브 --</mat-option>
                 <mat-optgroup *ngFor="let group of hubDeviceGroups" [label]="group.name" [disabled]="group.disabled">
                   <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}}
@@ -23,8 +23,8 @@
             </mat-form-field>
 
             <mat-form-field style="width: 25%">
-              <mat-select placeholder="청약단말" [formControl]="ucubeControl" (ngModelChange)="selectChange($event)"
-                          [(ngModel)]="selectDeviceModel">
+              <mat-select placeholder="청약단말" [formControl]="ucubeControl" (ngModelChange)="selectChange($event)">
+                <!-- [(ngModel)]="selectDeviceModel" -->
                 <mat-option>-- 청약(pvs연동)단말 --</mat-option>
                 <mat-optgroup *ngFor="let group of pvsDeviceGroups" [label]="group.name" [disabled]="group.disabled">
                   <mat-option *ngFor="let device of group.deviceList" [value]="device"> {{device.viewValue}}

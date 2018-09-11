@@ -12,7 +12,8 @@ export class PvsService {
   private headers: HttpHeaders;
 
   constructor(private http: HttpClient) {
-    this.SERVER = `${environment.HOST}`;
+    // this.SERVER = `${environment.HOST}`;
+    this.SERVER = "http://localhost:8080";
     // this.SERVER = `${pinn.target}`
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json'
