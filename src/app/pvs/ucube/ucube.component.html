@@ -8,8 +8,8 @@
 
   <div>
     <div style="float: left;width: 50%;">
-      <mat-card-content style="height: 630px">
-        <form id="ucubeForm" name="ucubeForm" [formGroup]="ucubeForm" (ngSubmit)="addPvs2SQL()" novalidate>
+      <form id="ucubeForm" name="ucubeForm" [formGroup]="ucubeForm" (ngSubmit)="addPvs2SQL()" novalidate>
+        <mat-card-content style="height: 630px">
           <div>
             <mat-form-field style="width: 25%">
               <mat-select #optionHub placeholder="허브" [formControl]="ucubeControl"
@@ -130,14 +130,15 @@
           </div>
 
           <mat-card-actions>
-            <button mat-raised-button type="submit" color="accent" style="margin:0px auto;display:flex">1. 가입자 추가
-            </button>
-            <button mat-raised-button type="submit" color="accent" style="margin:0px auto;display:flex">2. 청약 단말 추가
-            </button>
-            <button mat-raised-button type="button" color="accent" style="margin:0px auto;display:flex">강제 로그인</button>
           </mat-card-actions>
-        </form>
-      </mat-card-content>
+
+          <div style="justify-content: space-between;display: flex;padding: 10px;">
+            <button mat-raised-button type="submit" color="accent">1. 가입자 추가</button>
+            <button mat-raised-button type="submit" color="accent">2. 청약 단말 추가</button>
+            <button mat-raised-button type="button" color="accent">강제 로그인</button>
+          </div>
+        </mat-card-content>
+      </form>
     </div>
 
     <div style="float: right;width: 50%;">

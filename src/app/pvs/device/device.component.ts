@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, Input, OnDestroy} from '@angular/core';
 
 import * as $ from 'jquery';
 import 'node_modules/datatables.net';
@@ -13,6 +13,7 @@ import {DeviceGroup, DeviceList, DeviceService} from "./device.service";
 import {Md5} from "ts-md5/dist/md5";
 
 
+// TODO : uuid 생성 수정하기, java util이랑 uuid생성이 미묘하게 다르다...
 export class Uuid {
   static newUuid(deviceInfo: string): string {
     // return 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
@@ -35,7 +36,7 @@ export class Uuid {
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.css']
 })
-export class DeviceComponent implements OnInit {
+export class DeviceComponent implements OnInit, OnDestroy {
 
   chsDeviceModelList: Array<ChsDeviceModel>;
   dbName: String;
@@ -80,6 +81,14 @@ export class DeviceComponent implements OnInit {
       $('.deviceName').val(data[2]);
       $('.deviceTypeCode').val(data[1]);
     });
+
+    this.dbUrlCheck("dev00");
+  }
+
+  ngOnDestroy() {
+    this.chRef.detach(); // try this
+    // for me I was detect changes inside "subscribe" so was enough for me to just unsubscribe;
+    // this.authObserver.unsubscribe();
   }
 
   dbUrlCheck(dbOption): void {
@@ -89,27 +98,26 @@ export class DeviceComponent implements OnInit {
         this.dbName =  "dev00";
         break;
       case "개발1" :
-        this.dbName =  "dev01";
+        this.dbName = "";
         break;
       case "개발3" :
-        this.dbName =  "dev03";
+        this.dbName = "";
         break;
       case "개발4" :
-        this.dbName =  "dev04";
+        this.dbName = "";
         break;
     }
-    // TODO : multi DB연동 테스트 성공하면 아래 주석 풀기
-    // this.printChsDeviceModel(this.dbName);
+    this.printChsDeviceModel(this.dbName);
   }
 
+  // 셀렉트박스를 이용하여 단말 정보를 인풋 박스에 셋팅.
   selectChange(event) {
-    //In my case $event come with a id value
     // this.selectDeviceModel = this.alldeviceList[$event];
     if(null != event) {
       // let obj: DeviceList = JSON.parse(event.toString()); 이미 json이기때문에 parse하지 않아도 된다.
       let obj: DeviceList = event;
 
-      // TODO : select시 [(ngModel)]로 양방향 바인딩을 하고싶지만 한번의 셀렉트에 object안의 여러 value를 셋팅하는건 불가능한건가? ng-options를 사용이 가능한가? 자꾸 삽질하게된다..
+      // TODO : (ngModelChange) 쓰지 않고 [(ngModel)]로 양방향 바인딩을 하고싶지만 한번 셀렉트 체인지에 Device Object안의 여러 value를 셋팅하는건 불가능한건가? ng-options를 사용이 가능한가? 자꾸 삽질하게된다..
       // this.selectDeviceModel.value = obj.value;
       // this.selectDeviceModel.modelValue = obj.modelValue;
       // this.selectDeviceModel.typeValue = obj.typeValue;
@@ -119,26 +127,35 @@ export class DeviceComponent implements OnInit {
   }
 
   printChsDeviceModel(dbName: String): void {
-    this.pvsService.getChsDeviceModel(dbName)
-      .subscribe((responseMap: Array<ChsDeviceModel>) => {
-        // console.log(responseMap);
-        this.chsDeviceModelList = responseMap;
+    if (dbName === "") {
+      alert('이용 불가능');
+    } else {
+      this.pvsService.getChsDeviceModel(dbName)
+        .subscribe((responseMap: Array<ChsDeviceModel>) => {
+          // console.log(responseMap);
+          this.chsDeviceModelList = responseMap;
 
-        // You'll have to wait that changeDetection occurs and projects data into
-        // the HTML template, you can ask Angular to that for you ;-)
-        this.chRef.detectChanges();
+          // You'll have to wait that changeDetection occurs and projects data into
+          // the HTML template, you can ask Angular to that for you ;-)
+          this.chRef.detectChanges();
 
-        $('#chsDeviceModelTable').DataTable({
-          "order": [[ 0, "asc" ]],
-          "scrollY":        "500px",
-          "scrollCollapse": true,
-          "paging":         false,
-          // 테이블 데이터 변경 될 때 단일 초기화
-          retrieve: true,
-          destroy: true,
-          searching: true
+          $('#chsDeviceModelTable').DataTable({
+            "order": [[0, "asc"]],
+            "scrollY": "500px",
+            "scrollX": true,
+            "scrollCollapse": true,
+            "paging": false,
+            // 테이블 데이터 변경 될 때 단일 초기화
+            retrieve: true,
+            destroy: true,
+            searching: true,
+            // searchBox
+            language: {
+              searchPlaceholder: "Search any records..."
+            }
+          });
         });
-      });
+    }
   }
 
   createSQL() {
@@ -231,7 +248,6 @@ export class DeviceComponent implements OnInit {
    * DEVICE_ID_TYPE : 0은 MAC기준, 1은 SN기준
    *
    */
-  // TODO : uuid 생성 수정하기
   createUUID(name: string, typeCode: string, mac: string, sn: string, chsDeviceTypeLevel: string, deviceIdType: string): string {
 
     var uuidType = "";

@@ -128,38 +128,66 @@
   </mat-card>
 
   <div>
-    <div style="border: 1px solid navy">
-      멀티 데이터베이스 연동 서비스 준비중...
-      <br>
-      <mat-radio-group class="example-radio-group" [(ngModel)]="radioDBOptionModel" [disabled]="true">
-        <mat-radio-button class="example-radio-button" *ngFor="let db of dbOptionGroups" [disabled]="true" [value]="db" (click)="dbUrlCheck(db)">
-          {{db}}
-        </mat-radio-button>
-      </mat-radio-group>
-      <div class="example-selected-value">Your favorite season is: {{radioDBOptionModel}}</div>
-    </div>
-
-    <div>
-      <table id="chsDeviceModelTable" class="table table-bordered table-bordered table table-hover table table-sm dataTable">
-        <thead class="thead-light">
-        <tr>
-          <th>ID</th>
-          <th>CHS_DEVICE_TYPE_CODE</th>
-          <th>NAME</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <ng-template ngFor let-item [ngForOf]="chsDeviceModelList" let-idx="index">
-          <tr>
-            <th>{{item.id}}</th>
-            <th>{{item.chsDeviceTypeCode}}</th>
-            <th>{{item.name}}</th>
-          </tr>
-        </ng-template>
-        </tbody>
-      </table>
-    </div>
-    <!--<p-paginator [rows]="10" [totalRecords]="50" [rowsPerPageOptions]="[50, 100, 150, 300, 500]"></p-paginator>-->
+    <mat-radio-group class="example-radio-group" [(ngModel)]="radioDBOptionModel"> <!-- [disabled]="true" -->
+      <mat-radio-button class="example-radio-button" *ngFor="let db of dbOptionGroups" [value]="db"
+                        (click)="dbUrlCheck(db)"> <!-- [disabled]="true" -->
+        {{db}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <!--<div class="example-selected-value">Your favorite season is: {{radioDBOptionModel}}</div>-->
   </div>
+
+  <div>
+    <table id="chsDeviceModelTable"
+           class="table table-bordered table-bordered table table-hover table table-sm dataTable display nowrap">
+      <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>CHS_DEVICE_TYPE_CODE</th>
+        <th>NAME</th>
+        <th>MODEL_NO</th>
+        <th>DEVC_MDL_GRP_CD</th>
+        <th>DEVC_MDL_GRP_NM</th>
+        <th>DEVC_MDL_CD</th>
+        <th>DEVC_MDL_NM</th>
+        <th>MODEL_VENDOR</th>
+        <th>MODEL_VENDOR_CD</th>
+        <th>DISABLED</th>
+        <th>SOURCE</th>
+        <th>PLATFORM_API_VER</th>
+        <th>CONN_TYPE</th>
+        <th>PV_TYPE</th>
+        <th>SUBTYPE</th>
+        <th>CREATE_TIME</th>
+        <th>UPDATE_TIME</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <ng-template ngFor let-item [ngForOf]="chsDeviceModelList" let-idx="index">
+        <tr>
+          <th>{{item.id}}</th>
+          <th>{{item.chsDeviceTypeCode == null ? '(null)' : item.chsDeviceTypeCode}}</th>
+          <th>{{item.name == null ? '(null)' : item.name}}</th>
+          <th>{{item.modelNo == null ? '(null)' : item.modelNo}}</th>
+          <th>{{item.devcMdlGrpCd == null ? '(null)' : item.devcMdlGrpCd}}</th>
+          <th>{{item.devcMdlGrpNm == null ? '(null)' : item.devcMdlGrpNm}}</th>
+          <th>{{item.devcMdlCd == null ? '(null)' : item.devcMdlCd}}</th>
+          <th>{{item.devcMdlNm == null ? '(null)' : item.devcMdlNm}}</th>
+          <th>{{item.modelVendor == null ? '(null)' : item.modelVendor}}</th>
+          <th>{{item.modelVendorCd == null ? '(null)' : item.modelVendorCd}}</th>
+          <th>{{item.disabled == null ? '(null)' : item.disabled}}</th>
+          <th>{{item.source == null ? '(null)' : item.source}}</th>
+          <th>{{item.platformApiVer == null ? '(null)' : item.platformApiVer}}</th>
+          <th>{{item.connType == null ? '(null)' : item.connType}}</th>
+          <th>{{item.pvType == null ? '(null)' : item.pvType}}</th>
+          <th>{{item.subType == null ? '(null)' : item.subType}}</th>
+          <th>{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</th> <!-- 앵귤러 내장파이프 참조 -->
+          <th>{{item.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
+        </tr>
+      </ng-template>
+      </tbody>
+    </table>
+  </div>
+  <!--<p-paginator [rows]="10" [totalRecords]="50" [rowsPerPageOptions]="[50, 100, 150, 300, 500]"></p-paginator>-->
 </body>

@@ -26,13 +26,55 @@ export class DeviceService {
     {
     name: 'CGS연동 허브 - ZW',
     deviceList: [
-      {value: 'cgs_zw_01', modelValue: 'IHU50', typeValue: 'HUB', viewValue: '독립형허브(고급)', pvsValue: 'IG003'},
-      {value: 'cgs_zw_02', modelValue: 'GIHG20', typeValue: 'SHUB', viewValue: '보급형허브', pvsValue: 'IG005'},
-      {value: 'cgs_zw_03', modelValue: '000000010001', typeValue: 'DHUB', viewValue: '동글형허브1(구형)', pvsValue: 'IG001'},
-      {value: 'cgs_zw_04', modelValue: '018B00020001', typeValue: 'DHUB', viewValue: '동글형허브2(신형)', pvsValue: 'IG002'},
-      {value: 'cgs_zw_05', modelValue: '018B00020001', typeValue: 'LTEDHUB', viewValue: 'LTE동글형허브', pvsValue: 'IG002'},
-      {value: 'cgs_zw_06', modelValue: 'LAP255U', typeValue: 'WHUB', viewValue: 'WOOFER', pvsValue: 'IG004'},
-      {value: 'cgs_zw_07', modelValue: 'LGU-TVG-01', typeValue: 'TVG', viewValue: 'TVG', pvsValue: 'LGU-TVG-01'}
+      {
+        value: 'cgs_zw_01',
+        modelValue: 'IHU50',
+        typeValue: 'HUB',
+        viewValue: '독립형허브(고급)',
+        pvsValue: 'IG003'
+      },
+      {
+        value: 'cgs_zw_02',
+        modelValue: 'GIHG20',
+        typeValue: 'SHUB',
+        viewValue: '보급형허브',
+        pvsValue: 'IG005'
+      },
+      {
+        value: 'cgs_zw_03',
+        modelValue: '000000010001',
+        typeValue: 'DHUB',
+        viewValue: '동글형허브1(구형)',
+        pvsValue: 'IG001'
+      },
+      {
+        value: 'cgs_zw_04',
+        modelValue: '018B00020001',
+        typeValue: 'DHUB',
+        viewValue: '동글형허브2(신형)',
+        pvsValue: 'IG002'
+      },
+      {
+        value: 'cgs_zw_05',
+        modelValue: '018B00020001',
+        typeValue: 'LTEDHUB',
+        viewValue: 'LTE동글형허브',
+        pvsValue: 'IG002'
+      },
+      {
+        value: 'cgs_zw_06',
+        modelValue: 'LAP255U',
+        typeValue: 'WHUB',
+        viewValue: 'WOOFER',
+        pvsValue: 'IG004'
+      },
+      {
+        value: 'cgs_zw_07',
+        modelValue: 'LGU-TVG-01',
+        typeValue: 'TVG',
+        viewValue: 'TVG',
+        pvsValue: 'LGU-TVG-01'
+      }
     ]
   },
   {
@@ -71,9 +113,27 @@ export class DeviceService {
   {
     name: 'OGS연동 허브 - WIFI',
     deviceList: [
-      {value: 'ogs_wifi_01', modelValue: 'IRHG-01', typeValue: 'IRHUB', viewValue: 'IR허브(IRHG-01)', pvsValue: 'IG013'},
-      {value: 'ogs_wifi_02', modelValue: 'IRHM-01', typeValue: 'IRHUB', viewValue: 'IR허브(IRHM-01)', pvsValue: 'IG014'},
-      {value: 'ogs_wifi_03', modelValue: 'IRBD-01', typeValue: 'IRREMOCON', viewValue: 'IR리모컨(허브X)', pvsValue: 'ID082'}
+      {
+        value: 'ogs_wifi_01',
+        modelValue: 'IRHG-01',
+        typeValue: 'IRHUB',
+        viewValue: 'IR허브(IRHG-01)',
+        pvsValue: 'IG013'
+      },
+      {
+        value: 'ogs_wifi_02',
+        modelValue: 'IRHM-01',
+        typeValue: 'IRHUB',
+        viewValue: 'IR허브(IRHM-01)',
+        pvsValue: 'IG014'
+      },
+      {
+        value: 'ogs_wifi_03',
+        modelValue: 'IRBD-01',
+        typeValue: 'IRREMOCON',
+        viewValue: 'IR리모컨(허브X)',
+        pvsValue: 'ID082'
+      }
     ]
   }];
 
@@ -81,7 +141,13 @@ export class DeviceService {
     {
       name: '전략단말(CGS) - ZW',
       deviceList: [
-        {value: 'cgs_zw_01', modelValue: '022E00010001', typeValue: 'DOORLOCK', viewValue: '삼성도어락', pvsValue: 'ID101'},
+        {
+          value: 'cgs_zw_01',
+          modelValue: '022E00010001',
+          typeValue: 'DOORLOCK',
+          viewValue: '삼성도어락',
+          pvsValue: 'ID101'
+        },
         {
           value: 'cgs_zw_02',
           modelValue: '021210001000',
@@ -131,9 +197,27 @@ export class DeviceService {
           viewValue: '플러그2(개선형/SPES-02A)',
           pvsValue: 'ID026'
         },
-        {value: 'cgs_zw_09', modelValue: 'ID003', typeValue: 'EMETER', viewValue: '에너지미터', pvsValue: 'ID003'},
-        {value: 'cgs_zw_10', modelValue: '018B00400001', typeValue: 'GASVALVE', viewValue: '가스락', pvsValue: 'ID001'},
-        {value: 'cgs_zw_11', modelValue: '022C00030001', typeValue: 'DOORSENSOR', viewValue: '열림센서', pvsValue: 'ID004'},
+        {
+          value: 'cgs_zw_09',
+          modelValue: 'ID003',
+          typeValue: 'EMETER',
+          viewValue: '에너지미터',
+          pvsValue: 'ID003'
+        },
+        {
+          value: 'cgs_zw_10',
+          modelValue: '018B00400001',
+          typeValue: 'GASVALVE',
+          viewValue: '가스락',
+          pvsValue: 'ID001'
+        },
+        {
+          value: 'cgs_zw_11',
+          modelValue: '022C00030001',
+          typeValue: 'DOORSENSOR',
+          viewValue: '열림센서',
+          pvsValue: 'ID004'
+        },
         {
           value: 'cgs_zw_12',
           modelValue: '027300030001',
@@ -204,10 +288,34 @@ export class DeviceService {
           viewValue: '스위치4C(개선형)',
           pvsValue: 'ID023'
         },
-        {value: 'cgs_zw_22', modelValue: '', typeValue: 'SWITCH', viewValue: '대용량스위치 1구', pvsValue: ''},
-        {value: 'cgs_zw_23', modelValue: '', typeValue: 'SWITCH', viewValue: '대용량스위치 2구', pvsValue: ''},
-        {value: 'cgs_zw_24', modelValue: '', typeValue: 'SWITCH', viewValue: '대용량스위치 3구', pvsValue: ''},
-        {value: 'cgs_zw_25', modelValue: '018C00520001', typeValue: 'MUPTITAP', viewValue: '멀티탭', pvsValue: 'ID025'},
+        {
+          value: 'cgs_zw_22',
+          modelValue: '',
+          typeValue: 'SWITCH',
+          viewValue: '대용량스위치 1구',
+          pvsValue: ''
+        },
+        {
+          value: 'cgs_zw_23',
+          modelValue: '',
+          typeValue: 'SWITCH',
+          viewValue: '대용량스위치 2구',
+          pvsValue: ''
+        },
+        {
+          value: 'cgs_zw_24',
+          modelValue: '',
+          typeValue: 'SWITCH',
+          viewValue: '대용량스위치 3구',
+          pvsValue: ''
+        },
+        {
+          value: 'cgs_zw_25',
+          modelValue: '018C00520001',
+          typeValue: 'MUPTITAP',
+          viewValue: '멀티탭',
+          pvsValue: 'ID025'
+        },
         {
           value: 'cgs_zw_26',
           modelValue: '0257004D0001',
@@ -215,7 +323,13 @@ export class DeviceService {
           viewValue: '주방소화장치(파라텍)',
           pvsValue: 'ID104'
         },
-        {value: 'cgs_zw_27', modelValue: '023D00430001', typeValue: 'DOORCAM', viewValue: '도어캠', pvsValue: 'ID014'},
+        {
+          value: 'cgs_zw_27',
+          modelValue: '023D00430001',
+          typeValue: 'DOORCAM',
+          viewValue: '도어캠',
+          pvsValue: 'ID014'
+        },
         {
           value: 'cgs_zw_28',
           modelValue: '022C004E0001',
@@ -244,8 +358,19 @@ export class DeviceService {
           viewValue: '모션센서',
           pvsValue: 'ID039'
         },
-        {value: 'cgs_zw_32', modelValue: '022C004E0001', typeValue: 'SIREN', viewValue: '움직임알리미', pvsValue: 'ID041'},
-        {value: 'cgs_zw_33', modelValue: '014D00540001', typeValue: 'BUTTON', viewValue: 'IoT버튼', pvsValue: 'ID040'}
+        {
+          value: 'cgs_zw_32',
+          modelValue: '022C004E0001',
+          typeValue: 'SIREN',
+          viewValue: '움직임알리미',
+          pvsValue: 'ID041'
+        }, {
+          value: 'cgs_zw_33',
+          modelValue: '014D00540001',
+          typeValue: 'BUTTON',
+          viewValue: 'IoT버튼',
+          pvsValue: 'ID040'
+        }
       ]
     },
     {
@@ -286,16 +411,40 @@ export class DeviceService {
       name: '청약제휴단말(CGS) - WIFI',
       // disabled: true,
       deviceList: [
-        {value: 'cgs_wifi_01', modelValue: '022E33000001', typeValue: 'FEEDER', viewValue: '펫스테이션', pvsValue: 'ID102'}
+        {
+          value: 'cgs_wifi_01',
+          modelValue: '022E33000001',
+          typeValue: 'FEEDER',
+          viewValue: '펫스테이션',
+          pvsValue: 'ID102'
+        }
       ]
     },
     {
       name: '청약제휴단말(OGS) - WIFI',
       // disabled: true,
       deviceList: [
-        {value: 'ogs_wifi_01', modelValue: 'SPTL-W01', typeValue: 'PLUG', viewValue: 'WIFI 플러그', pvsValue: 'ID032'},
-        {value: 'ogs_wifi_02', modelValue: 'MTTL-W01', typeValue: 'MULTITAP', viewValue: 'WIFI 멀티탭', pvsValue: 'ID033'},
-        {value: 'ogs_wifi_04', modelValue: 'ID018', typeValue: 'AIRSENSOR', viewValue: '실내기', pvsValue: 'ID018'},
+        {
+          value: 'ogs_wifi_01',
+          modelValue: 'SPTL-W01',
+          typeValue: 'PLUG',
+          viewValue: 'WIFI 플러그',
+          pvsValue: 'ID032'
+        },
+        {
+          value: 'ogs_wifi_02',
+          modelValue: 'MTTL-W01',
+          typeValue: 'MULTITAP',
+          viewValue: 'WIFI 멀티탭',
+          pvsValue: 'ID033'
+        },
+        {
+          value: 'ogs_wifi_04',
+          modelValue: 'ID018',
+          typeValue: 'AIRSENSOR',
+          viewValue: '실내기',
+          pvsValue: 'ID018'
+        },
         {
           value: 'ogs_wifi_05',
           modelValue: 'IAQ-LS100',
@@ -303,7 +452,13 @@ export class DeviceService {
           viewValue: '보급형 실내기',
           pvsValue: 'ID034'
         },
-        {value: 'ogs_wifi_06', modelValue: 'ID020', typeValue: 'AIRSENSOR', viewValue: '실외기', pvsValue: 'ID020'}
+        {
+          value: 'ogs_wifi_06',
+          modelValue: 'ID020',
+          typeValue: 'AIRSENSOR',
+          viewValue: '실외기',
+          pvsValue: 'ID020'
+        }
       ]
     }];
 
@@ -312,8 +467,20 @@ export class DeviceService {
       name: '직접연동(CGS) - WIFI',
       // disabled: true,
       deviceList: [
-        {value: 'cgs_wifi_02', modelValue: 'KITURAMI', typeValue: 'KITURAMI', viewValue: '귀뚜라미', pvsValue: 'KITURAMI'},
-        {value: 'cgs_wifi_03', modelValue: 'RINNAI', typeValue: 'RINNAI', viewValue: '린나이', pvsValue: 'RINNAI'}
+        {
+          value: 'cgs_wifi_02',
+          modelValue: 'KITURAMI',
+          typeValue: 'KITURAMI',
+          viewValue: '귀뚜라미',
+          pvsValue: 'KITURAMI'
+        },
+        {
+          value: 'cgs_wifi_03',
+          modelValue: 'RINNAI',
+          typeValue: 'RINNAI',
+          viewValue: '린나이',
+          pvsValue: 'RINNAI'
+        }
       ]
     },
     {
@@ -347,16 +514,76 @@ export class DeviceService {
           viewValue: 'LG 공기청정기',
           pvsValue: ''
         },
-        {value: 'ogs_wifi_10', modelValue: 'MA324PDW', typeValue: 'OVEN', viewValue: 'LG 오븐', pvsValue: ''},
-        {value: 'ogs_wifi_11', modelValue: 'HITN', typeValue: 'ROBOTCLEANER', viewValue: 'LG 로봇청소기', pvsValue: ''},
-        {value: 'ogs_wifi_12', modelValue: 'SC-TF', typeValue: 'REFRIGERATOR', viewValue: 'LG 냉장고', pvsValue: ''},
-        {value: 'ogs_wifi_13', modelValue: 'FR41C8MDUPH_WD_KR', typeValue: 'WASHER', viewValue: 'LG 세탁기', pvsValue: ''},
-        {value: 'ogs_wifi_14', modelValue: 'SS_AIRC01', typeValue: 'AIRCONDITIONER', viewValue: '삼성 에어컨', pvsValue: ''},
-        {value: 'ogs_wifi_15', modelValue: 'SS_AIRP01', typeValue: 'AIRPURIFIER', viewValue: '삼성 공기청정기', pvsValue: ''},
-        {value: 'ogs_wifi_16', modelValue: 'SS_OVEN01', typeValue: 'OVEN', viewValue: '삼성 오븐', pvsValue: ''},
-        {value: 'ogs_wifi_17', modelValue: 'SS_ROBO01', typeValue: 'ROBOTCLEANER', viewValue: '삼성 로봇청소기', pvsValue: ''},
-        {value: 'ogs_wifi_18', modelValue: 'SS_REFR01', typeValue: 'REFRIGERATOR', viewValue: '삼성 냉장고', pvsValue: ''},
-        {value: 'ogs_wifi_19', modelValue: 'SS_WASH01', typeValue: 'WASHER', viewValue: '삼성 세탁기', pvsValue: ''},
+        {
+          value: 'ogs_wifi_10',
+          modelValue: 'MA324PDW',
+          typeValue: 'OVEN',
+          viewValue: 'LG 오븐',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_11',
+          modelValue: 'HITN',
+          typeValue: 'ROBOTCLEANER',
+          viewValue: 'LG 로봇청소기',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_12',
+          modelValue: 'SC-TF',
+          typeValue: 'REFRIGERATOR',
+          viewValue: 'LG 냉장고',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_13',
+          modelValue: 'FR41C8MDUPH_WD_KR',
+          typeValue: 'WASHER',
+          viewValue: 'LG 세탁기',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_14',
+          modelValue: 'SS_AIRC01',
+          typeValue: 'AIRCONDITIONER',
+          viewValue: '삼성 에어컨',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_15',
+          modelValue: 'SS_AIRP01',
+          typeValue: 'AIRPURIFIER',
+          viewValue: '삼성 공기청정기',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_16',
+          modelValue: 'SS_OVEN01',
+          typeValue: 'OVEN',
+          viewValue: '삼성 오븐',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_17',
+          modelValue: 'SS_ROBO01',
+          typeValue: 'ROBOTCLEANER',
+          viewValue: '삼성 로봇청소기',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_18',
+          modelValue: 'SS_REFR01',
+          typeValue: 'REFRIGERATOR',
+          viewValue: '삼성 냉장고',
+          pvsValue: ''
+        },
+        {
+          value: 'ogs_wifi_19',
+          modelValue: 'SS_WASH01',
+          typeValue: 'WASHER',
+          viewValue: '삼성 세탁기',
+          pvsValue: ''
+        },
       ]
     }];
 
