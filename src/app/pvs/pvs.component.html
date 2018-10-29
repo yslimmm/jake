@@ -1,12 +1,29 @@
-  <!--<h1> 서버에서 얻은 값!!!! : {{print}}</h1>-->
-  <!--<div [routerLink]="['/']" class="btn btn-primary">로그인하기</div>-->
-<div style="justify-content:space-between;display:flex;">
-  <!--<button mat-raised-button color="accent" routerLink="pvs/user" value="pvsOptions01">사용자 등록</button> -->
-  <button mat-raised-button color="accent" (click)="pvsOptionCheck(1)" value="pvsOptions01">사용자 등록</button>
-  <button mat-raised-button color="accent" (click)="pvsOptionCheck(2)" value="pvsOptions02">단말 등록</button>
-  <button mat-raised-button color="accent" (click)="pvsOptionCheck(3)" value="pvsOptions03">사용자/단말 초기화</button>
-  <button mat-raised-button color="accent" (click)="pvsOptionCheck(4)" value="pvsOptions04">UCUBE 청약</button>
-  <!--<button mat-raised-button color="accent" (click)="pvsOptionCheck(5)" value="pvsOptions05">자동실행 만들기</button>-->
-</div>
+<!--<h1> 서버에서 얻은 값!!!! : {{print}}</h1>-->
+<!--<div [routerLink]="['/']" class="btn btn-primary">로그인하기</div>-->
 
-<router-outlet></router-outlet>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+
+    <button mat-raised-button color="accent" (click)="pvsOptionCheck(1)" value="pvsOptions01">사용자 등록</button>
+    <br>
+    <button mat-raised-button color="accent" (click)="pvsOptionCheck(2)" value="pvsOptions02">단말 등록</button>
+    <br>
+    <button mat-raised-button color="accent" (click)="pvsOptionCheck(3)" value="pvsOptions03">사용자/단말 초기화</button>
+    <br>
+    <!--<button mat-raised-button color="accent" (click)="pvsOptionCheck(4)" value="pvsOptions04">UCUBE 청약</button>-->
+    <!--<button mat-raised-button color="accent" (click)="pvsOptionCheck(5)" value="pvsOptions05">자동실행 만들기</button>-->
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      사이드 메뉴
+    </button>
+  </div>
+
+  <!-- body -->
+  <router-outlet></router-outlet>
+
+</mat-drawer-container>

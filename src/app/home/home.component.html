@@ -2,7 +2,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <mat-toolbar color="primary">
-  <span>New Provisioning Tools v2.0.0</span>
+  <span routerLink="/pvs/user">Jake</span>
 
   <mat-menu #menu="matMenu">
     <!-- 루트 페이지는 필요 없으니까 메뉴 막기
@@ -11,8 +11,18 @@
       <span>home</span>
     </button>
     -->
+    <button mat-menu-item routerLink="/">
+      <mat-icon>home</mat-icon>
+      <span>홈</span>
+    </button>
+
     <button mat-menu-item routerLink="/pvs/user">
-      <mat-icon>voicemail</mat-icon>
+      <mat-icon>home</mat-icon>
+      <span>청약 툴</span>
+    </button>
+
+    <button mat-menu-item routerLink="/msg">
+      <mat-icon>home</mat-icon>
       <span>청약 툴</span>
     </button>
   </mat-menu>
@@ -29,5 +39,13 @@
 
 <!-- 부모index.html의 route-outlet에 자식들을 넣는다. -->
 <div class="container">
+
+  <div style="justify-content:space-between;display:flex;">
+    <button mat-raised-button color="accent" routerLink="/">홈</button>
+    <button mat-raised-button color="accent" routerLink="/pvs/user">청약</button>
+    <button mat-raised-button color="accent" routerLink="/msg">전문</button>
+  </div>
+</div>
+<div style="padding: 20px">
   <router-outlet></router-outlet>
 </div>

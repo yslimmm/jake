@@ -5,6 +5,7 @@ import {RouterModule} from '@angular/router';
 import {
   MatIconModule, MatMenuModule, MatToolbarModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule,
   MatInputModule, MatDatepickerModule, MatSnackBarModule, MatNativeDateModule, MatRadioModule, MatSelectModule,
+  MatSidenavModule,
 } from '@angular/material';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -27,6 +28,7 @@ import { UcubeComponent } from './pvs/ucube/ucube.component';
 import { AutoexeComponent } from './pvs/autoexe/autoexe.component';
 import {SelectModule} from "ng-select";
 import {DeviceService} from "./pvs/device/device.service";
+import {MsgComponent} from './msg/msg.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import {DeviceService} from "./pvs/device/device.service";
     DeleteComponent,
     UcubeComponent,
     AutoexeComponent,
+    MsgComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import {DeviceService} from "./pvs/device/device.service";
     AccordionModule,
     PaginatorModule,    /*테이블 페이징*/
     SelectModule,
+    MatSidenavModule,
   ],
   providers: [PvsService, DeviceService],
   bootstrap: [AppComponent]

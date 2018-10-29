@@ -82,7 +82,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       $('.deviceTypeCode').val(data[1]);
     });
 
-    this.dbUrlCheck("dev00");
+    // this.dbUrlCheck("dev00");
   }
 
   ngOnDestroy() {
@@ -98,13 +98,13 @@ export class DeviceComponent implements OnInit, OnDestroy {
         this.dbName =  "dev00";
         break;
       case "개발1" :
-        this.dbName = "";
+        this.dbName = "dev01";
         break;
       case "개발3" :
-        this.dbName = "";
+        this.dbName = "dev03";
         break;
       case "개발4" :
-        this.dbName = "";
+        this.dbName = "dev04";
         break;
     }
     this.printChsDeviceModel(this.dbName);
