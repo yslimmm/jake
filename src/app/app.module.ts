@@ -29,6 +29,7 @@ import { AutoexeComponent } from './pvs/autoexe/autoexe.component';
 import {SelectModule} from "ng-select";
 import {DeviceService} from "./pvs/device/device.service";
 import {MsgComponent} from './msg/msg.component';
+import {MsgService} from "./msg/msg.service";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import {MsgComponent} from './msg/msg.component';
     SelectModule,
     MatSidenavModule,
   ],
-  providers: [PvsService, DeviceService],
+  providers: [PvsService, DeviceService, MsgService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

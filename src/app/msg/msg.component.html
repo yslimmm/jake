@@ -2,3 +2,43 @@
   1. 서버에서 /home/yslim/msg 아래에 있는 디렉토리 명 갖고온 만큼 셀렉트 박스 뿌리기<br>
   2. 제목을 셀렉트 타이틀에 걸고 누르면 전문 나오게 파싱하기
 </p>
+
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+
+    <button mat-raised-button color="accent" (click)="getList(`ags`)">AGS</button>
+    <br>
+    <button mat-raised-button color="accent" (click)="getList(`pas`)">PAS</button>
+    <br>
+    <button mat-raised-button color="accent" (click)="getList(`iss`)">ISS</button>
+    <br>
+    <button mat-raised-button color="accent" (click)="getList(`eps`)">EPS</button>
+    <br>
+    <button mat-raised-button color="accent" (click)="getList(`etc`)">ETC</button>
+    <br>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      사이드 메뉴
+    </button>
+  </div>
+
+  <mat-card>
+    <mat-card-header style="height: 70px">
+      <mat-card-title>TEST API LIST</mat-card-title>
+      <mat-card-subtitle>
+        /home/yslim/msg/
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content style="height: 630px">
+      <label for="textarea">SQL TEXT AREA</label>
+      <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
+    </mat-card-content>
+  </mat-card>
+
+</mat-drawer-container>

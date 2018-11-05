@@ -98,13 +98,13 @@ export class DeviceComponent implements OnInit, OnDestroy {
         this.dbName =  "dev00";
         break;
       case "개발1" :
-        this.dbName = "dev01";
+        this.dbName = "";
         break;
       case "개발3" :
-        this.dbName = "dev03";
+        this.dbName = "";
         break;
       case "개발4" :
-        this.dbName = "dev04";
+        this.dbName = "";
         break;
     }
     this.printChsDeviceModel(this.dbName);
