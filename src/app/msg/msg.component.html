@@ -9,15 +9,15 @@
     <p>Auto-resizing sidenav</p>
     <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
 
-    <button mat-raised-button color="accent" (click)="getList(`ags`)">AGS</button>
+    <button mat-raised-button color="accent" (click)="getList('ags')">AGS</button>
     <br>
-    <button mat-raised-button color="accent" (click)="getList(`pas`)">PAS</button>
+    <button mat-raised-button color="accent" (click)="getList('pas')">PAS</button>
     <br>
-    <button mat-raised-button color="accent" (click)="getList(`iss`)">ISS</button>
+    <button mat-raised-button color="accent" (click)="getList('iss')">ISS</button>
     <br>
-    <button mat-raised-button color="accent" (click)="getList(`eps`)">EPS</button>
+    <button mat-raised-button color="accent" (click)="getList('eps')">EPS</button>
     <br>
-    <button mat-raised-button color="accent" (click)="getList(`etc`)">ETC</button>
+    <button mat-raised-button color="accent" (click)="getList('etc')">ETC</button>
     <br>
   </mat-drawer>
 
@@ -36,7 +36,27 @@
     </mat-card-header>
 
     <mat-card-content style="height: 630px">
-      <label for="textarea">SQL TEXT AREA</label>
+
+      <mat-form-field style="width: 25%">
+        <mat-select #optionHub placeholder="전문리스트" (ngModelChange)="selectChange($event)"
+                    [(ngModel)]="selectMessageListModel">
+          <mat-option>-- 전문 리스트 --</mat-option>
+          <mat-option *ngFor="let info of msgList" [value]="info"> {{info}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+
+      <div>
+        <div style="float: left;display: table-cell;vertical-align: bottom;">
+          <label for="textarea">SQL TEXT AREA</label>
+        </div>
+
+        <div style="float: right">
+          <button mat-raised-button color="accent" style="margin: 5px">SEND REQUEST</button>
+          <button mat-raised-button color="accent" style="margin: 5px">.json DOWNLOAD</button>
+        </div>
+      </div>
+
       <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
     </mat-card-content>
   </mat-card>

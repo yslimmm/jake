@@ -9,6 +9,9 @@ import {MsgService} from "./msg.service";
 })
 export class MsgComponent implements OnInit {
 
+  msgList: Array<String>;
+  selectMessageListModel: Array<String>;
+
   serverDirectoryList: Array<String>;
   serverList: Array<String>;
 
@@ -21,17 +24,40 @@ export class MsgComponent implements OnInit {
 
   initialize(): void {
     this.msgService.getDirectoryList().subscribe((responseMap: Array<String>) => {
-      console.log(responseMap);
-      this.serverDirectoryList = responseMap;
-      console.log(this.serverDirectoryList);
+      if (responseMap.length != 0) {
+        this.serverDirectoryList = responseMap;
+        console.log("=====initialize()=====");
+        console.log(this.serverDirectoryList);
+      }
     });
   };
 
   getList(serverInfo): void {
     this.msgService.getMessageList(serverInfo).subscribe((responseMap: Array<String>) => {
-      console.log(responseMap);
-      this.serverList = responseMap;
-      console.log(this.serverList);
+      this.msgList = null;
+      if (responseMap.length != 0) {
+        this.msgList = responseMap;
+        this.setList(this.msgList);
+        console.log("=====getList()=====");
+        console.log(this.msgList);
+      }
     });
+  }
+
+  setList(list: any): void {
+    this.msgList = list;
+  }
+
+  selectChange(event) {
+    console.log("====selectChange====");
+
+    if (null != event) {
+      // let obj: DeviceList = JSON.parse(event.toString()); 이미 json이기때문에 parse하지 않아도 된다.
+      let obj: string = event;
+      console.log(event);
+
+      $('#textarea').val(event);
+
+    }
   }
 }
