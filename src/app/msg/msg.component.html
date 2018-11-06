@@ -7,7 +7,7 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" opened>
     <p>Auto-resizing sidenav</p>
-    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur.</p>
 
     <button mat-raised-button color="accent" (click)="getList('ags')">AGS</button>
     <br>
@@ -40,7 +40,7 @@
       <mat-form-field style="width: 25%">
         <mat-select #optionHub placeholder="전문리스트" (ngModelChange)="selectChange($event)"
                     [(ngModel)]="selectMessageListModel">
-          <mat-option>-- 전문 리스트 --</mat-option>
+          <mat-option>-- {{serverInfo}} 전문 리스트 --</mat-option>
           <mat-option *ngFor="let info of msgList" [value]="info"> {{info}}</mat-option>
         </mat-select>
       </mat-form-field>

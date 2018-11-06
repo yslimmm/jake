@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {MsgService} from "./msg.service";
+import {MsgService, RequestInfo} from "./msg.service";
 
 @Component({
   selector: 'app-msg',
@@ -12,8 +12,13 @@ export class MsgComponent implements OnInit {
   msgList: Array<String>;
   selectMessageListModel: Array<String>;
 
+  serverInfo: string;
+
   serverDirectoryList: Array<String>;
   serverList: Array<String>;
+
+  jsonRequestResult: Array<RequestInfo>;
+
 
   constructor(private msgService: MsgService, private router: Router) {
   }
@@ -32,8 +37,9 @@ export class MsgComponent implements OnInit {
     });
   };
 
-  getList(serverInfo): void {
+  getList(serverInfo: string): void {
     this.msgService.getMessageList(serverInfo).subscribe((responseMap: Array<String>) => {
+      this.serverInfo = serverInfo;
       this.msgList = null;
       if (responseMap.length != 0) {
         this.msgList = responseMap;
@@ -48,16 +54,29 @@ export class MsgComponent implements OnInit {
     this.msgList = list;
   }
 
-  selectChange(event) {
-    console.log("====selectChange====");
+  selectChange(fileName) {
+    console.log("====selectChange()====");
 
-    if (null != event) {
-      // let obj: DeviceList = JSON.parse(event.toString()); 이미 json이기때문에 parse하지 않아도 된다.
-      let obj: string = event;
-      console.log(event);
+    if (null != fileName) {
+      // let obj: DeviceList = JSON.parse(filename.toString()); 이미 json이기때문에 parse하지 않아도 된다.
+      console.log(fileName);
 
-      $('#textarea').val(event);
+      this.msgService.getMessage(this.serverInfo, fileName).subscribe((responseMap: String) => {
+        if (responseMap.length != 0) {
+          console.log(responseMap);
+          this.jsonRequestResult = this.msgService.getMessageBeautiful(responseMap);
 
+          console.log("~~~~~ length : " + this.jsonRequestResult.length);
+
+          for (var j = 0; j < this.jsonRequestResult.length; j++) {
+            console.log(this.jsonRequestResult[j].url);
+          }
+
+          $('#textarea').val('ttt');
+        } else {
+          $('#textarea').val('내용 없음');
+        }
+      });
     }
   }
 }
