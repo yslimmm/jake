@@ -46,18 +46,28 @@
       </mat-form-field>
       <br>
 
-      <div>
-        <div style="float: left;display: table-cell;vertical-align: bottom;">
-          <label for="textarea">SQL TEXT AREA</label>
-        </div>
-
-        <div style="float: right">
-          <button mat-raised-button color="accent" style="margin: 5px">SEND REQUEST</button>
-          <button mat-raised-button color="accent" style="margin: 5px">.json DOWNLOAD</button>
-        </div>
+      <div style="border: solid 1px red;">
+        <span>SQL TEXT AREA</span>
+        <button mat-raised-button color="accent" style="margin: 5px;">.json DOWNLOAD</button>
       </div>
 
-      <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
+      <div style="border: solid 1px blue">
+        <div>
+          <ng-template ngFor let-item [ngForOf]="jsonRequestResult" let-idx="index">
+            {{item.name}}
+            <button mat-raised-button color="accent" style="margin: 5px">SEND REQUEST</button>
+            <br>
+            <textarea id="textarea" style="overflow-y: scroll;resize: none;">
+              {{item.url}}
+              {{item.body}}
+            </textarea>
+            <br>
+          </ng-template>
+        </div>
+
+      </div>
+
+
     </mat-card-content>
   </mat-card>
 

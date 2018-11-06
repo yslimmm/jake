@@ -66,13 +66,7 @@ export class MsgComponent implements OnInit {
           console.log(responseMap);
           this.jsonRequestResult = this.msgService.getMessageBeautiful(responseMap);
 
-          console.log("~~~~~ length : " + this.jsonRequestResult.length);
-
-          for (var j = 0; j < this.jsonRequestResult.length; j++) {
-            console.log(this.jsonRequestResult[j].url);
-          }
-
-          $('#textarea').val('ttt');
+          // $('#textarea').val('ttt');
         } else {
           $('#textarea').val('내용 없음');
         }
