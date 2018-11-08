@@ -1,0 +1,23 @@
+<link href="https://danielmg.org/assets/demo/uploader/css/jquery.dm-uploader.min.css?v=v10" rel="stylesheet">
+<link href="https://danielmg.org/assets/demo/uploader/css/main.css?v=v10" rel="stylesheet">
+<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-638054-11"></script>
+<div>
+  <p>Please select only one.</p>
+  <mat-chip-list>
+    <mat-chip *ngFor="let chip of serverDirectoryList">{{chip}}</mat-chip>
+    <!-- [selected]="chip.state" (selectionChange)="changeSelected($event)" (click)="chip.state=!chip.state"-->
+  </mat-chip-list>
+
+  <p>{{uploadPath}}</p>
+</div>
+<br>
+
+<div id="drag-and-drop-zone" class="dm-uploader p-5 text-center" style="border: dashed #f44336;">
+  <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop Files here</h3>
+
+  <div class="btn btn-primary btn-block mb-5">
+    <span>Open the file Browser</span>
+    <input type="file" title="Click to add Files" multiple="">
+  </div>
+</div>

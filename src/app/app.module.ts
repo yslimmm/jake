@@ -1,35 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {routes} from './app-routing.module';
-import {RouterModule} from '@angular/router';
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
+import {routes} from "./app-routing.module";
+import {RouterModule} from "@angular/router";
 import {
-  MatIconModule, MatMenuModule, MatToolbarModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule,
-  MatInputModule, MatDatepickerModule, MatSnackBarModule, MatNativeDateModule, MatRadioModule, MatSelectModule,
+  MatIconModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatSnackBarModule,
+  MatNativeDateModule,
+  MatRadioModule,
+  MatSelectModule,
   MatSidenavModule,
-} from '@angular/material';
+  MatDialogModule, MatChipsModule
+} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FlexLayoutModule} from '@angular/flex-layout';
+import {FlexLayoutModule} from "@angular/flex-layout";
 import {HttpClientModule} from "@angular/common/http";
-
-import { AppComponent } from './app.component';
-import { PvsComponent } from './pvs/pvs.component';
-import { HomeComponent } from './home/home.component';
-
+import {AppComponent} from "./app.component";
+import {PvsComponent} from "./pvs/pvs.component";
+import {HomeComponent} from "./home/home.component";
 import {PvsService} from "./pvs/pvs.service";
 import {DataTablesModule} from "angular-datatables";
-
-import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
-import {PaginatorModule} from 'primeng/paginator';
-import { UserComponent } from './pvs/user/user.component';
-import { DeviceComponent } from './pvs/device/device.component';
-import { DeleteComponent } from './pvs/delete/delete.component';
-import { UcubeComponent } from './pvs/ucube/ucube.component';
-import { AutoexeComponent } from './pvs/autoexe/autoexe.component';
+import {AccordionModule} from "primeng/accordion";
+import {PaginatorModule} from "primeng/paginator";
+import {UserComponent} from "./pvs/user/user.component";
+import {DeviceComponent} from "./pvs/device/device.component";
+import {DeleteComponent} from "./pvs/delete/delete.component";
+import {UcubeComponent} from "./pvs/ucube/ucube.component";
+import {AutoexeComponent} from "./pvs/autoexe/autoexe.component";
 import {SelectModule} from "ng-select";
 import {DeviceService} from "./pvs/device/device.service";
-import {MsgComponent} from './msg/msg.component';
-import {MsgService} from "./msg/msg.service";
+import {MsgComponent, MsgDialogComponent} from "./msg/msg.component";
+import {MsgService} from "./msg/msg.service";     //accordion and accordion tab
 
 @NgModule({
   declarations: [
@@ -42,6 +51,7 @@ import {MsgService} from "./msg/msg.service";
     UcubeComponent,
     AutoexeComponent,
     MsgComponent,
+    MsgDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,8 +80,15 @@ import {MsgService} from "./msg/msg.service";
     PaginatorModule,    /*테이블 페이징*/
     SelectModule,
     MatSidenavModule,
+    /*Dialog*/
+    MatDialogModule,
+    /*Chip*/
+    MatChipsModule,
   ],
   providers: [PvsService, DeviceService, MsgService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    MsgDialogComponent,
+  ]
 })
 export class AppModule { }

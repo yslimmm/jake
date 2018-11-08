@@ -1,15 +1,12 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" opened>
-    <button mat-raised-button color="accent" (click)="getList('ags')">AGS</button>
-    <br>
-    <button mat-raised-button color="accent" (click)="getList('pas')">PAS</button>
-    <br>
-    <button mat-raised-button color="accent" (click)="getList('iss')">ISS</button>
-    <br>
-    <button mat-raised-button color="accent" (click)="getList('eps')">EPS</button>
-    <br>
-    <button mat-raised-button color="accent" (click)="getList('etc')">ETC</button>
-    <br>
+
+    <!-- button 하나로 ngFor를 돌리고 싶을때 오리엔테이션이 호리젠탈로 간다... 버티컬로 하고싶을 때는 ng-container로 감싸서 html <br>태그와 혼용한다. -->
+    <ng-container *ngFor="let server of serverDirectoryList; let i = index">
+      <button mat-raised-button color="accent" (click)="getList(server)">{{server}}</button>
+      <br/>
+    </ng-container>
+
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -22,7 +19,7 @@
     <mat-card-header style="height: 70px">
       <mat-card-title>TEST API LIST</mat-card-title>
       <mat-card-subtitle>
-        ★★★★★★★★★★★★★★★★★★★★★가져다 대시오....★
+        ★★★★★★★★★★★★★★★★★★★★★....★
       </mat-card-subtitle>
     </mat-card-header>
 
@@ -38,8 +35,9 @@
         <button mat-raised-button id="create" color="accent" style="margin: 5px;" (ngModel)="downloadJsonModel"
                 (click)="downloadJsonFile()">.json DOWNLOAD
         </button>
-      </div>
 
+        <button mat-raised-button (click)="openDialog()" style="float: right">Upload JSON</button>
+      </div>
 
       <div>
         <div>

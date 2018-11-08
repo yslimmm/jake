@@ -1,6 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject, ChangeDetectorRef} from "@angular/core";
 import {Router} from "@angular/router";
-import {MsgService, RequestInfo, headerList, JsonGroup} from "./msg.service";
+import {MsgService, RequestInfo, JsonGroup} from "./msg.service";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
+
+/**
+ * dialog를 통해 업로드할 json 정보
+ */
+export interface DialogData {
+  serverDirectoryList: Array<String>;
+  uploadJson: string;
+}
 
 @Component({
   selector: 'app-msg',
@@ -15,7 +24,6 @@ export class MsgComponent implements OnInit {
   serverInfo: string;
 
   serverDirectoryList: Array<String>;
-  serverList: Array<String>;
 
   jsonGroup: JsonGroup;
   jsonRequestResult: Array<RequestInfo>;
@@ -23,7 +31,11 @@ export class MsgComponent implements OnInit {
   downloadJsonModel: Array<RequestInfo>;
   downloadJsonFileName: string;
 
-  constructor(private msgService: MsgService, private router: Router) {
+  uploadJson: string;
+
+  constructor(private msgService: MsgService,
+              private router: Router,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -41,6 +53,9 @@ export class MsgComponent implements OnInit {
   };
 
   getList(serverInfo: string): void {
+
+    console.log(serverInfo);
+
     this.msgService.getMessageList(serverInfo).subscribe((responseMap: Array<String>) => {
       this.serverInfo = serverInfo;
       this.msgList = null;
@@ -156,4 +171,41 @@ export class MsgComponent implements OnInit {
     textFile = window.URL.createObjectURL(data);
     console.log(textFile);
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MsgDialogComponent, {
+      // width: '250px',
+      data: {serverDirectoryList: this.serverDirectoryList/*, name: this.name*/} //dialog Componnent open시 넘겨주는 data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.uploadJson = result;
+    });
+  }
+}
+
+/**
+ * Dialog Component
+ */
+@Component({
+  selector: 'msg-dialog',
+  templateUrl: 'msg-dialog.html',
+})
+export class MsgDialogComponent {
+
+  uploadPath: string = 'upload path. (/home/yslim/msg/)';
+  serverDirectoryList: Array<String>;
+
+  constructor(public dialogRef: MatDialogRef<MsgDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private cdr: ChangeDetectorRef /*chips-list selection*/) {
+    console.log('====MsgDialogComponent.constructor()====');
+    this.serverDirectoryList = data.serverDirectoryList;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
