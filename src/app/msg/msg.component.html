@@ -1,8 +1,5 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" opened>
-    <p>Auto-resizing sidenav</p>
-    <p>Lorem, ipsum dolor sit amet consectetur.</p>
-
     <button mat-raised-button color="accent" (click)="getList('ags')">AGS</button>
     <br>
     <button mat-raised-button color="accent" (click)="getList('pas')">PAS</button>
@@ -33,21 +30,21 @@
 
       <div>
         <mat-form-field style="width: 50%;">
-          <mat-select #optionHub placeholder="전문리스트" (ngModelChange)="selectChange($event)"
-                      [(ngModel)]="selectMessageListModel">
+          <mat-select placeholder="전문리스트" (ngModelChange)="selectChange($event)" [(ngModel)]="selectMessageListModel">
             <mat-option>-- {{serverInfo}} 전문 리스트 --</mat-option>
             <mat-option *ngFor="let info of msgList" [value]="info"> {{info}}</mat-option>
           </mat-select>
         </mat-form-field>
-
-        <button mat-raised-button color="accent" style="margin: 5px;">.json DOWNLOAD</button>
-        <!-- (click)="downloadJsonFile({{info}}, {{jsonRequestResult}})"-->
+        <button mat-raised-button id="create" color="accent" style="margin: 5px;" (ngModel)="downloadJsonModel"
+                (click)="downloadJsonFile()">.json DOWNLOAD
+        </button>
       </div>
 
 
       <div>
         <div>
           <ng-template ngFor let-item [ngForOf]="jsonRequestResult" let-idx="index">
+            <br>
             <h3>{{item.name}}</h3>
             <button mat-raised-button color="accent" style="margin: 5px;float: right;">SEND REQUEST</button>
             <br>
@@ -69,7 +66,6 @@
           </ng-template>
         </div>
       </div>
-
 
     </mat-card-content>
   </mat-card>
