@@ -1,9 +1,3 @@
-<p>
-  1. 서버에서 /home/yslim/msg 아래에 있는 디렉토리 명 갖고온 만큼 셀렉트 박스 뿌리기<br>
-  2. 제목을 셀렉트 타이틀에 걸고 누르면 전문 나오게 파싱하기
-</p>
-
-
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" opened>
     <p>Auto-resizing sidenav</p>
@@ -31,40 +25,49 @@
     <mat-card-header style="height: 70px">
       <mat-card-title>TEST API LIST</mat-card-title>
       <mat-card-subtitle>
-        /home/yslim/msg/
+        ★★★★★★★★★★★★★★★★★★★★★가져다 대시오....★
       </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content style="height: 630px">
+    <mat-card-content>
 
-      <mat-form-field style="width: 25%">
-        <mat-select #optionHub placeholder="전문리스트" (ngModelChange)="selectChange($event)"
-                    [(ngModel)]="selectMessageListModel">
-          <mat-option>-- {{serverInfo}} 전문 리스트 --</mat-option>
-          <mat-option *ngFor="let info of msgList" [value]="info"> {{info}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <br>
+      <div>
+        <mat-form-field style="width: 50%;">
+          <mat-select #optionHub placeholder="전문리스트" (ngModelChange)="selectChange($event)"
+                      [(ngModel)]="selectMessageListModel">
+            <mat-option>-- {{serverInfo}} 전문 리스트 --</mat-option>
+            <mat-option *ngFor="let info of msgList" [value]="info"> {{info}}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <div style="border: solid 1px red;">
-        <span>SQL TEXT AREA</span>
         <button mat-raised-button color="accent" style="margin: 5px;">.json DOWNLOAD</button>
+        <!-- (click)="downloadJsonFile({{info}}, {{jsonRequestResult}})"-->
       </div>
 
-      <div style="border: solid 1px blue">
+
+      <div>
         <div>
           <ng-template ngFor let-item [ngForOf]="jsonRequestResult" let-idx="index">
-            {{item.name}}
-            <button mat-raised-button color="accent" style="margin: 5px">SEND REQUEST</button>
+            <h3>{{item.name}}</h3>
+            <button mat-raised-button color="accent" style="margin: 5px;float: right;">SEND REQUEST</button>
             <br>
-            <textarea id="textarea" style="overflow-y: scroll;resize: none;">
-              {{item.url}}
-              {{item.body}}
-            </textarea>
+            {{item.url | json}}
+            <br>
+
+            <ng-template ngFor let-header [ngForOf]=item.header let-idx="index">
+              <div>
+                {{header.key}} : <input placeholder="value" value={{header.value}}>
+              </div>
+            </ng-template>
+
+            <br>
+            <textarea class="form-control" id="textarea"
+                      style="width: 100%;height: 100px;overflow-y: scroll;resize: none;">{{item.body | json}}</textarea>
+
+            <br>
             <br>
           </ng-template>
         </div>
-
       </div>
 
 

@@ -84,10 +84,6 @@ export class MsgService {
 
   private SERVER: string;
   private headers: HttpHeaders;
-  private json: JsonGroup;
-  private itemList: ItemList[] = [];
-
-  private reqInfoArray: Array<RequestInfo> = [];
 
   constructor(private http: HttpClient) {
     this.SERVER = `${pinn.target}`;
@@ -109,13 +105,21 @@ export class MsgService {
   }
 
   public getMessageBeautiful(message: any): Array<RequestInfo> {
-    // message은 현재 Object 타입으로 넘어왔지만 any로 받아 JsonGroup으로 넘겨줌
-    this.json = message;
 
-    for (var i = 0; i < this.json.item.length; i++) {
-      this.itemList[i] = this.json.item[i];
-      this.itemList[i].request.name = this.encoding(this.itemList[i].name);
-      this.reqInfoArray.push(this.itemList[i].request);
+    var json: JsonGroup;
+    var itemList: ItemList[] = [];
+    var reqInfoArray: Array<RequestInfo> = [];
+
+    // message은 현재 Object 타입으로 넘어왔지만 any로 받아 JsonGroup으로 넘겨줌
+    json = message;
+
+    for (var i = 0; i < json.item.length; i++) {
+      itemList[i] = json.item[i];
+
+      // set api test name in array
+      itemList[i].request.name = this.encoding(itemList[i].name);
+
+      reqInfoArray.push(itemList[i].request);
     }
 
     /*
@@ -125,7 +129,7 @@ export class MsgService {
      console.log(this.reqInfoArray[j].url);
      }
      */
-    return this.reqInfoArray;
+    return reqInfoArray;
   }
 
   encoding(text): string {
