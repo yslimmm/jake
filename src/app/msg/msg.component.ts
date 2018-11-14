@@ -191,6 +191,7 @@ export class MsgComponent implements OnInit {
 @Component({
   selector: 'msg-dialog',
   templateUrl: 'msg-dialog.html',
+  styleUrls: ['./msg.component.css']
 })
 export class MsgDialogComponent {
 
@@ -207,5 +208,6 @@ export class MsgDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 
 }

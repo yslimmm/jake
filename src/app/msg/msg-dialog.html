@@ -1,17 +1,28 @@
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+      integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.9.0/themes/prism-coy.min.css"
+      integrity="sha256-OPRaIzpiEHvHfgydlnA/89k9d55T02hawuzgWygdLls=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+<!-- Custom styles for this template -->
 <link href="https://danielmg.org/assets/demo/uploader/css/jquery.dm-uploader.min.css?v=v10" rel="stylesheet">
 <link href="https://danielmg.org/assets/demo/uploader/css/main.css?v=v10" rel="stylesheet">
 <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-638054-11"></script>
+
+
 <div>
   <p>Please select only one.</p>
   <mat-chip-list>
     <mat-chip *ngFor="let chip of serverDirectoryList">{{chip}}</mat-chip>
-    <!-- [selected]="chip.state" (selectionChange)="changeSelected($event)" (click)="chip.state=!chip.state"-->
+    <!-- [selected]="chip.state" (selectionChange)="changeSelected($event)" (click)="chip.state=!chip.state"&ndash;&gt; -->
   </mat-chip-list>
 
   <p>{{uploadPath}}</p>
 </div>
 <br>
+
 
 <div id="drag-and-drop-zone" class="dm-uploader p-5 text-center" style="border: dashed #f44336;">
   <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop Files here</h3>
@@ -19,5 +30,21 @@
   <div class="btn btn-primary btn-block mb-5">
     <span>Open the file Browser</span>
     <input type="file" title="Click to add Files" multiple="">
+    <button class="box__button" type="submit">Upload</button>
   </div>
 </div>
+
+<!-- Drag and Drop File Uploading -->
+<!-- https://css-tricks.com/drag-and-drop-file-uploading/ -->
+<form class="box" method="post" action="" enctype="multipart/form-data">
+  <div class="box__input">
+    <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected"
+           multiple/>
+    <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+    <button class="box__button" type="submit">Upload</button>
+  </div>
+  <div class="box__uploading">Uploading&hellip;</div>
+  <div class="box__success">Done!</div>
+  <div class="box__error">Error! <span></span>.</div>
+</form>
+

@@ -24,4 +24,7 @@ export class PvsService {
     return this.http.get<ChsDeviceModel>(this.SERVER + `/pvs/select_chs_device_model?db=${dbName}`);
   }
 
+  public getQuery(operation, modelNo, typeCode, mac, sn, homeCode, uuid) {
+    return this.http.get(this.SERVER + `/pvs/query/${operation}?modelNo=${modelNo}&typeCode=${typeCode}&mac=${mac}&sn=${sn}&homeCode=${homeCode}&uuid=${uuid}`);
+  }
 }
