@@ -30,7 +30,7 @@ export class DeleteComponent implements OnInit {
       return;
     }
 
-    this.pvsService.getQuery("delete", "", "", "", "", $('#homeCode').val(), $('#uuid').val()).subscribe((responseMap: String) => {
+    this.pvsService.getDeleteQuery($('#homeCode').val(), $('#uuid').val()).subscribe((responseMap: String) => {
       if (responseMap.length != 0) {
         $('#textarea').val(responseMap.toString());
       } else {

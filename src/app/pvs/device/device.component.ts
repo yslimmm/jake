@@ -173,73 +173,31 @@ export class DeviceComponent implements OnInit, OnDestroy {
     var mac = $('#mac').val() + "";
     var sn = $('#sn').val() + "";
 
+    // default.
     var chsDeviceTypeLevel = "2";
     var deviceIdType = "1";
 
+    // EMETER, SPTL-W01(WIFI PLUG), MTTL-W01(WIFI PLUG)
+    if (name.equals("ID003")) {
+      chsDeviceTypeLevel = "1";
+      deviceIdType = "1";
+    } else if (name.equals("SPTL-W01") || name.equals("MTTL-W01")) {
+      chsDeviceTypeLevel = "1";
+      deviceIdType = "0";
+    } else {
+      chsDeviceTypeLevel = "2";
+      deviceIdType = "1";
+    }
+
     var uuid = this.createUUID(name, typeCode, mac, sn, chsDeviceTypeLevel, deviceIdType);
 
-    // TODO : 스크립트 파일로 빼놓기.
-    // 기등록 데이터 등록 전 삭제
-    var delete_chs_device_conn_info   = "DELETE FROM CHS_DEVICE_CONN_INFO WHERE DEVICE_ID = '" + uuid + "';";
-
-    var delete_iot_device_noti_info   = "DELETE FROM IOT_DEVICE_NOTI_INFO WHERE DEVICE_ID = '" + uuid + "';";
-    var delete_iot_device_alim_info   = "DELETE FROM IOT_DEVICE_ALIM_INFO WHERE DEVICE_ID = '" + uuid + "';";
-
-    var delete_chs_device             = "DELETE FROM CHS_DEVICE WHERE ID = '" + uuid + "';";
-    var delete_iot_homemode_device    = "DELETE FROM IOT_HOMEMODE_DEVICE WHERE DEVICE_ID = '" + uuid + "';";
-    var delete_iot_home_batchcontrol  = "DELETE FROM IOT_HOME_BATCHCONTROL WHERE DEVICE_ID = '" + uuid + "';";
-
-    var delete_iot_device_ext_timer_info = "DELETE FROM IOT_DEVICE_EXT_TIMER_INFO WHERE DEVICE_ID = '" + uuid + "';";
-
-    var delete_iot_home_autoexe1      ="DELETE FROM IOT_HOME_AUTOEXE WHERE ID IN (SELECT AUTOEXE_ID FROM IOT_AUTOEXE_ACTION  WHERE DEVICE_ID ='" + uuid + "');";
-    var delete_iot_autoexe_tigger1    ="DELETE FROM IOT_AUTOEXE_TRIGGER WHERE AUTOEXE_ID IN (SELECT AUTOEXE_ID FROM IOT_AUTOEXE_ACTION  WHERE DEVICE_ID ='" + uuid + "');";
-    var delete_iot_autoexe_action1    ="DELETE FROM IOT_AUTOEXE_ACTION  WHERE DEVICE_ID ='" + uuid + "';";
-
-    var delete_iot_home_autoexe2      ="DELETE FROM IOT_HOME_AUTOEXE WHERE ID IN (SELECT AUTOEXE_ID FROM IOT_AUTOEXE_TRIGGER  WHERE DEVICE_ID ='" + uuid + "');";
-    var delete_iot_autoexe_tigger2    ="DELETE FROM IOT_AUTOEXE_ACTION WHERE AUTOEXE_ID IN (SELECT AUTOEXE_ID FROM IOT_AUTOEXE_TRIGGER  WHERE DEVICE_ID ='" + uuid + "');";
-    var delete_iot_autoexe_action2    ="DELETE FROM IOT_AUTOEXE_TRIGGER WHERE DEVICE_ID ='" + uuid + "';";
-
-    var delete_iot_dev_current_status = "DELETE FROM IOT_DEV_CURRENT_STATUS WHERE DEVICE_ID = '" + uuid + "';";
-    var delete_iot_device_event_hist  = "DELETE FROM IOT_DEVICE_EVENT_HIST WHERE DEVICE_ID = '" + uuid + "';";
-    var delete_iot_push_event_hist    = "DELETE FROM IOT_PUSH_EVENT_HIST WHERE DEVICE_ID = '" + uuid + "';";
-
-    // EMETER, SPTL-W01(WIFI PLUG), MTTL-W01(WIFI PLUG)
-   /* if(name.equals("ID003")) {
-    chsDeviceTypeLevel = "1";
-    deviceIdType= "1";
-    } else if (name.equals("SPTL-W01") || name.equals("MTTL-W01")) {
-    chsDeviceTypeLevel = "1";
-    deviceIdType= "0";
-    } else {
-    chsDeviceTypeLevel = "2";
-    deviceIdType= "1";
-    }*/
-
-    // 단말 등록
-    var insert_chs_device = "INSERT INTO CHS_DEVICE(ID, CHS_DEVICE_MODEL_ID, CHS_DEVICE_MODEL_NAME, CHS_DEVICE_TYPE_CODE, chsDeviceTypeLevel, deviceIdType, PARENT_DEVICE_ID, MAC, SN, HOME_CODE, CHS_SUBS_INFO_SUBS_NO, DEL_YN, CONTROL_ENABLE) "
-                          + "VALUES ('" + uuid + "', '0', '" + this.deviceForm.controls['name'].value + "', '" + this.deviceForm.controls['chsDeviceModelTypeCode'].value + "', '"
-      + chsDeviceTypeLevel + "', " + deviceIdType + ", '" + uuid + "', '" + mac + "', '" + sn + "', '"
-                          + this.deviceForm.controls['homeCode'].value + "', '" + this.deviceForm.controls['homeCode'].value + "', 'N', 'Y');";
-
-
-    var textarea      = delete_chs_device_conn_info + "\n"
-                      + delete_iot_device_noti_info + "\n"
-                      + delete_iot_device_alim_info + "\n"
-                      + delete_chs_device + "\n"
-                      + delete_iot_homemode_device + "\n"
-                      + delete_iot_home_batchcontrol + "\n"
-                      + delete_iot_device_ext_timer_info + "\n"
-                      + delete_iot_home_autoexe1 + "\n"
-                      + delete_iot_autoexe_tigger1 + "\n"
-                      + delete_iot_autoexe_action1 + "\n"
-                      + delete_iot_home_autoexe2 + "\n"
-                      + delete_iot_autoexe_tigger2 + "\n"
-                      + delete_iot_autoexe_action2 + "\n"
-                      + delete_iot_dev_current_status + "\n"
-                      + delete_iot_device_event_hist + "\n"
-                      + delete_iot_push_event_hist + "\n\n"
-                      + insert_chs_device;
-    $('#textarea').val(textarea);
+    this.pvsService.getDeviceQuery(name, typeCode, mac, sn, $('#homeCode').val(), uuid, chsDeviceTypeLevel, deviceIdType).subscribe((responseMap: String) => {
+      if (responseMap.length != 0) {
+        $('#textarea').val(responseMap.toString());
+      } else {
+        $('#textarea').val('server error.');
+      }
+    });
   }
 
   /**

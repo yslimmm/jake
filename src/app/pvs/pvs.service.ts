@@ -24,7 +24,40 @@ export class PvsService {
     return this.http.get<ChsDeviceModel>(this.SERVER + `/pvs/select_chs_device_model?db=${dbName}`);
   }
 
-  public getQuery(operation, modelNo, typeCode, mac, sn, homeCode, uuid) {
-    return this.http.get(this.SERVER + `/pvs/query/${operation}?modelNo=${modelNo}&typeCode=${typeCode}&mac=${mac}&sn=${sn}&homeCode=${homeCode}&uuid=${uuid}`);
+  /**
+   * 사용자 등록
+   * @param oneId
+   * @param subsNo
+   * @param homeName
+   * @param subsType
+   * @param custNo
+   * @param svcCode
+   */
+  public getUserQuery(oneId, subsNo, homeName, subsType, custNo, svcCode) {
+    return this.http.get(this.SERVER + `/pvs/query/user?oneId=${oneId}&subsNo=${subsNo}&homeName=${homeName}&subsType=${subsType}&custNo=${custNo}&svcCode=${svcCode}`);
+  }
+
+  /**
+   * 단말 등록
+   * @param modelNo
+   * @param typeCode
+   * @param mac
+   * @param sn
+   * @param homeCode
+   * @param uuid
+   * @param chsDeviceTypeLevel
+   * @param deviceIdType
+   */
+  public getDeviceQuery(modelNo, typeCode, mac, sn, homeCode, uuid, chsDeviceTypeLevel, deviceIdType) {
+    return this.http.get(this.SERVER + `/pvs/query/device?modelNo=${modelNo}&typeCode=${typeCode}&mac=${mac}&sn=${sn}&homeCode=${homeCode}&uuid=${uuid}&chsDeviceTypeLevel=${chsDeviceTypeLevel}&deviceIdType=${deviceIdType}`);
+  }
+
+  /**
+   * 사용자&단말 초기화
+   * @param homeCode
+   * @param uuid
+   */
+  public getDeleteQuery(homeCode, uuid) {
+    return this.http.get(this.SERVER + `/pvs/query/delete?homeCode=${homeCode}&uuid=${uuid}`);
   }
 }
