@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Validators, FormControl, NgForm, FormGroupDirective, FormBuilder, FormGroup} from "@angular/forms";
 import {ErrorStateMatcher, MatSnackBar} from "@angular/material";
+import {PvsService} from "../pvs.service";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -41,7 +42,8 @@ export class UserComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private snackBar: MatSnackBar,
+  constructor(private pvsService: PvsService,
+              private snackBar: MatSnackBar,
               private fb: FormBuilder) {
     this.form = this.fb.group({
       oneId: new FormControl(null, [Validators.required,

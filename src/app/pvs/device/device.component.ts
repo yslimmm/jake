@@ -178,7 +178,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     var deviceIdType = "1";
 
     // EMETER, SPTL-W01(WIFI PLUG), MTTL-W01(WIFI PLUG)
-    if (name.equals("ID003")) {
+    /*if (name.equals("ID003")) {
       chsDeviceTypeLevel = "1";
       deviceIdType = "1";
     } else if (name.equals("SPTL-W01") || name.equals("MTTL-W01")) {
@@ -187,8 +187,18 @@ export class DeviceComponent implements OnInit, OnDestroy {
     } else {
       chsDeviceTypeLevel = "2";
       deviceIdType = "1";
-    }
+     }*/
 
+    if (name === "ID003") {
+      chsDeviceTypeLevel = "1";
+      deviceIdType = "1";
+    } else if ((name === "SPTL-W01") || (name === "MTTL-W01")) {
+      chsDeviceTypeLevel = "1";
+      deviceIdType = "0";
+    } else {
+      chsDeviceTypeLevel = "2";
+      deviceIdType = "1";
+    }
     var uuid = this.createUUID(name, typeCode, mac, sn, chsDeviceTypeLevel, deviceIdType);
 
     this.pvsService.getDeviceQuery(name, typeCode, mac, sn, $('#homeCode').val(), uuid, chsDeviceTypeLevel, deviceIdType).subscribe((responseMap: String) => {
