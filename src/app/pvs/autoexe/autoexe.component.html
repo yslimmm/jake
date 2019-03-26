@@ -1,3 +1,118 @@
-<p>
-  autoexe works!
-</p>
+<mat-card style="height: 700px;">
+  <mat-card-header style="height: 70px">
+    <mat-card-title>자동실행 등록</mat-card-title>
+    <!--<mat-card-subtitle>사용자 등록을 할 수 있다...</mat-card-subtitle>-->
+  </mat-card-header>
+
+  <div>
+    <div style="float: left;width: 50%;">
+      <mat-card-content style="height: 700px">
+        <form [formGroup]="form" (ngSubmit)="createSQL()" novalidate>
+
+          <!-- ONE_ID -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ONE_ID" [errorStateMatcher]="matcher" formControlName="oneId">
+            <!-- [formControl]="emailFormControl" -->
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- SUBS_NO / HOME_CODE -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="SUBS_NO" formControlName="subsNo"> <!-- [formControl]="subsNoFormControl"-->
+            <mat-hint>Ex) 500099912345 OR herit_home OR yslim55</mat-hint>
+            <mat-error>
+              영/숫자 12자리 이내로 입력하세요.
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- AUTOEXE_NAME -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="AUTOEXE_NAME" id="autoexeName" value="자동실행 이름" formControlName="autoexeName">
+          </mat-form-field>
+          <br>
+          <br>
+
+          <b>STEP1</b>
+          <!-- STEP 1 -->
+          <!-- DEVICE_ID --> <!-- SUB_ID -->
+          <div>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP1 DEVICE_ID" id="step1_deviceId" value=""
+                     formControlName="step1_deviceId">
+            </mat-form-field>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP1 DEVICE_SUB_ID" id="step1_deviceSubId" value=""
+                     formControlName="step1_deviceSubId">
+              <mat-hint>공백 가능</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!-- EVENT_ID --><!-- RULE_ID -->
+          <div>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP1 EVENT_ID" id="step1_eventId" value="" formControlName="step1_eventId">
+            </mat-form-field>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP1 RULE_ID" id="step1_ruldId" value="" formControlName="step1_ruldId">
+            </mat-form-field>
+          </div>
+          <br>
+          <br>
+
+          <div style="display: flow-root;">
+            <b>STEP2</b>
+            <button mat-raised-button color="accent" style="float: right;">STEP2 +</button>
+          </div>
+          <!-- STEP 2 -->
+          <!-- DEVICE_ID --> <!-- SUB_ID -->
+          <div>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP2 DEVICE_ID" id="step2_deviceId" value=""
+                     formControlName="step2_deviceId">
+            </mat-form-field>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP2 DEVICE_SUB_ID" id="step2_deviceSubId" value=""
+                     formControlName="step2_deviceSubId">
+              <mat-hint>공백 가능</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!-- EVENT_ID --><!-- RULE_ID -->
+          <div>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP2 EVENT_ID" id="step2_eventId" value="" formControlName="step2_eventId">
+            </mat-form-field>
+            <mat-form-field style="width: 50%">
+              <input matInput placeholder="STEP2 RULE_ID" id="step2_ruldId" value="" formControlName="step2_ruldId">
+            </mat-form-field>
+          </div>
+          <br>
+          <br>
+
+          <div style="justify-content: space-between;display: flex;padding: 10px;">
+            <button type="submit" mat-raised-button color="accent" style="margin:0px auto;display:flex">SQL 생성</button>
+          </div>
+
+        </form>
+      </mat-card-content>
+    </div>
+
+    <div style="float: right;width: 50%;">
+      <mat-card-content style="height: 700px">
+        <label for="textarea">SQL TEXT AREA</label>
+        <textarea class="form-control" id="textarea" style="height: 560px;overflow-y: scroll;resize: none;"></textarea>
+      </mat-card-content>
+    </div>
+
+  </div>
+</mat-card>
